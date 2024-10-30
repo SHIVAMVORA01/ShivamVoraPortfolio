@@ -20,7 +20,7 @@ const Portfolio = () => {
       id: 1,
       title: "Urja: The Pocket Energy-saving App",
       description: "Transforming people's energy conservation habits",
-      image: "images/Urja.png",
+      image: "/images/Urja.png",
       tags: ["Research", "UI Design", "Prototyping"],
     },
     {
@@ -28,21 +28,21 @@ const Portfolio = () => {
       title: "UTS App Redesign",
       description:
         "Enhancing Unreserved Ticketing Experience for Indian Railways",
-      image: "images/UTS.png",
+      image: "/images/UTS.png",
       tags: ["UI Design", "Web Development", "Transport"],
     },
     {
       id: 3,
       title: "College Website Redesign",
       description: "Complete redesign of DJSCE college website",
-      image: "images/DJSCE.png",
+      image: "/images/DJSCE.png",
       tags: ["UI/UX", "Web Design", "Education"],
     },
     {
       id: 4,
       title: "Student Portal",
       description: "Student Portal",
-      image: "images/Student.png",
+      image: "/images/Student.png",
       tags: ["UI/UX", "Web Design", "Education"],
     },
   ];
@@ -191,7 +191,7 @@ const Portfolio = () => {
           <div className="flex items-center justify-center mt-6">
             <div className="relative">
               <img
-                src="images/Shivam Vora.png"
+                src="/images/Shivam Vora.png"
                 alt="Shivam Vora"
                 className="rounded-xl w-48 h-48 md:w-64 md:h-64 object-cover shadow-lg"
               />
