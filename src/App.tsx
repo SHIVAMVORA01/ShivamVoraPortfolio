@@ -62,8 +62,8 @@ const Portfolio = () => {
       title: "AICAN - User Experience and Research Intern",
       period: "Sep 2021 - Nov 2021",
       description: [
-        "Collaborated on UX research and design for smart controllers.",
-        "Designed real-time dashboards for monitoring and control.",
+        "Conducted user research, including interviews and surveys, to understand user needs and pain points. Analyzed data to identify design opportunities and improve user interactions with smart controllers, enhancing the overall user experience.",
+        "Created intuitive, user-friendly dashboards using data visualization best practices to display real-time data, enabling users to monitor device performance and control operations efficiently. Worked closely with developers to ensure seamless integration and optimal performance of the dashboard features.",
       ],
       files: [{ src: "/files/Aican.pdf", type: "pdf" }],
     },
@@ -72,8 +72,8 @@ const Portfolio = () => {
       title: "The Breakout Hunt - User Experience Intern",
       period: "June 2021 - Aug 2021",
       description: [
-        "Conducted competitor analysis, user surveys, and research to enhance the app’s user experience.",
-        "Collaborated with developers for a successful app launch, now available on Google Playstore.",
+        "Performed in-depth competitor benchmarking to identify gaps and areas for improvement in user experience. Designed and distributed user surveys to gather feedback on app usability, leading to actionable insights that informed UX design improvements and helped align features with user expectations",
+        "Worked closely with the development team to implement UX design changes based on research findings. Assisted in the iterative design process, including prototyping and testing, to ensure a smooth user flow and visual consistency. Contributed to a successful app launch, enhancing accessibility and satisfaction, with the app now publicly available on Google Playstore.",
       ],
       files: [{ src: "/files/BreakoutHunt.pdf", type: "pdf" }],
     },
