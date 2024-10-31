@@ -7,6 +7,7 @@ import {
   Mail,
   Target,
   Menu,
+  ArrowUp,
 } from "lucide-react";
 
 const Portfolio = () => {
@@ -15,6 +16,30 @@ const Portfolio = () => {
   const [activeFile, setActiveFile] = useState(null);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
+  const [showTopButton, setShowTopButton] = useState(false); // State for back-to-top button visibility
+
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    // Event listener for scroll to show/hide the back-to-top button
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowTopButton(true);
+      } else {
+        setShowTopButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
 
   const experiences = [
     {
@@ -353,6 +378,7 @@ const Portfolio = () => {
         ],
         retrospective:
           "The redesign resulted in a more accessible, visually appealing, and functional website, improving satisfaction among students and staff.The new website is available at www.djsce.ac.in",
+        files: [{ src: "/files/djsce.pdf", type: "pdf" }],
       },
     },
     {
@@ -363,8 +389,8 @@ const Portfolio = () => {
       tags: ["UI/UX", "Web Design", "Education"],
       details: {
         overview:
-          "Developed a dedicated portal to streamline access to academic resources, schedules, and updates for students.",
-        timeline: "August 2022 - October 2022",
+          "Developed the portal to bridge the gap between faculty mentors and students. It acts as a credible source of student information. It allows the students to showcase their academia along with their professional and interpersonal skills & ongoing six-monthly progress on this portal.",
+        timeline: "June 2021 - February 2022",
         tools: "Figma, React",
         contributions: [
           "UI/UX Design",
@@ -372,19 +398,14 @@ const Portfolio = () => {
           "User Testing",
         ],
         problemStatement:
-          "Students faced challenges accessing academic resources due to fragmented systems...",
+          "The faculty mentors faced challenges to identify the key skills and expertise of students to write effective LORs for them",
         solutionOverview:
-          "The student portal consolidates resources, schedules, and academic information in a single, easy-to-navigate platform.",
+          "This profile portal assists the faculty mentors to identify the key skills and expertise of students to write effective LORs for them. It also gives students a chance to display their academic and professional competence in a well articulated manner.",
         researchInsights: [
           {
             title: "Survey",
             content:
-              "Gathered feedback from students regarding their experience with existing systems...",
-          },
-          {
-            title: "Competitive Analysis",
-            content:
-              "Analyzed similar portals at other institutions to identify best practices...",
+              "Gathered feedback from faculties regarding their experience with existing systems.",
           },
         ],
         objectives: [
@@ -394,11 +415,6 @@ const Portfolio = () => {
         ],
         designProcess: [
           {
-            title: "User Journey Mapping",
-            content:
-              "Mapped out key user journeys to simplify common tasks like accessing schedules.",
-          },
-          {
             title: "Prototyping",
             content:
               "Developed interactive prototypes to test with student users.",
@@ -406,22 +422,19 @@ const Portfolio = () => {
         ],
         keyFeatures: [
           {
-            title: "Dashboard",
-            content:
-              "Displays personalized information and quick links to resources.",
+            title: "Homepage",
+            content: "Displays information and quick links to resources.",
+            image: "/images/profile_landing_screen.png",
           },
           {
-            title: "Class Schedules",
-            content:
-              "Organized schedules with filtering options for easier viewing.",
-          },
-          {
-            title: "Resource Library",
-            content: "Centralized access to academic materials and resources.",
+            title: "Basic Profile",
+            content: "Allows users to set their basic profile details",
+            image: "/images/profile_profilescreen.png",
           },
         ],
         retrospective:
-          "The Student Portal provides a centralized, intuitive platform that has significantly reduced the time students spend looking for information, improving their academic experience.",
+          "The Student Portal provides a centralized, intuitive platform that has significantly reduced the time faculties spend looking for information, improving their LoR writing experience.The website is available at https://djsce-it-student-portal.netlify.app  and used by 400+ students",
+        files: [{ src: "/files/djsce1.pdf", type: "pdf" }],
       },
     },
   ];
@@ -1010,7 +1023,7 @@ const Portfolio = () => {
               <h4 className="text-xl font-bold text-gray-900 mb-4">
                 Retrospective
               </h4>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-600 mb-4">
                 {activeProject.details.retrospective
                   .split(" ")
                   .map((word, index) =>
@@ -1031,6 +1044,28 @@ const Portfolio = () => {
                     )
                   )}
               </p>
+
+              {/* Files and Attachments in Retrospective */}
+              {activeProject.details.files && (
+                <div>
+                  <p className="text-gray-600 mb-4 font-bold">
+                    Files & Attachments
+                  </p>
+                  <div className="flex space-x-2 mt-2">
+                    {activeProject.details.files.map((file, index) => (
+                      <img
+                        key={index}
+                        src={
+                          file.type === "image" ? file.src : "/images/pdf.png"
+                        } // Show PDF icon if it's a PDF file
+                        alt="File Preview"
+                        className="w-12 h-16 shadow-md cursor-pointer"
+                        onClick={() => window.open(file.src, "_blank")} // Opens file in a new window
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -1133,6 +1168,17 @@ const Portfolio = () => {
           </div>
         </div>
       </section>
+
+        {/* Back to Top Button */}
+        {showTopButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 bg-gray-900 text-white p-3 rounded-full shadow-md hover:bg-gray-800 transition duration-300"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="h-6 w-6" />
+        </button>
+      )}
     </div>
   );
 };
