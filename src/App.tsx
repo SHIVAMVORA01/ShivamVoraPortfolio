@@ -479,17 +479,10 @@ const Portfolio = () => {
     },
     {
       category: "Programming Languages & Technologies",
-      items: [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "React.js",
-        "Python",
-        "SQL",
-      ],
+      items: ["HTML", "CSS", "JavaScript", "React.js", "Python", "SQL"],
     },
   ];
-  
+
   useEffect(() => {
     const sections = [
       document.querySelector(".hero-section"),
@@ -707,8 +700,9 @@ const Portfolio = () => {
                   <li className="flex items-start">
                     <Award className="h-5 w-5 text-gray-900 mt-1 mr-3" />
                     <p className="text-gray-600">
-                      Letter of Appreciation from DJSCE Principal for college
-                      contributions
+                      Mentored and Judged for Pixel Paranoia, a UI &
+                      Design-centric hackathon hosted by Dwarkadas J. Sanghvi
+                      College of Engineering, guiding over 50+ participants
                     </p>
                   </li>
                 </ul>
