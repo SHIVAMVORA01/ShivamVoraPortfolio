@@ -40,7 +40,6 @@ const Portfolio = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
   const experiences = [
     {
       id: 1,
@@ -1164,13 +1163,22 @@ const Portfolio = () => {
                 <Mail className="h-5 w-5 mr-2" />
                 Email Me
               </a>
+              <a
+                href="/files/Resume.pdf" // Replace with your actual resume file path
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100"
+              >
+                <Briefcase className="h-5 w-5 mr-2" />
+                View Resume
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-        {/* Back to Top Button */}
-        {showTopButton && (
+      {/* Back to Top Button */}
+      {showTopButton && (
         <button
           onClick={scrollToTop}
           className="fixed bottom-6 right-6 bg-gray-900 text-white p-3 rounded-full shadow-md hover:bg-gray-800 transition duration-300"
