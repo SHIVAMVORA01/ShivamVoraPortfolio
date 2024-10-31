@@ -61,16 +61,15 @@ const Portfolio = () => {
         "Collaborated with the Ministry of Electronics & IT to develop OLABS, a virtual platform that enabled remote STEM education for 10,000+ students during COVID-19.",
         "Designed and launched a virtual chemistry laboratory environment within OLABS that facilitated practical learning for students in remote setups, reaching over 150 schools across India.",
       ],
-      files: [
-        { src: "/files/CDAC.pdf", type: "pdf" },
-      ],
+      files: [{ src: "/files/CDAC.pdf", type: "pdf" }],
     },
   ];
 
   const projects = [
     {
       id: 1,
-      title: "Urja: The Pocket Energy-saving App",
+      title:
+        "Urja: The Pocket Energy-saving App (Young Designer's League Finalists 2022)",
       description: "Transforming people's energy conservation habits",
       image: "/images/Urja.png",
       tags: ["Research", "UI Design", "Prototyping"],
@@ -81,49 +80,120 @@ const Portfolio = () => {
         tools: "Figma",
         contributions: ["User Research", "Interaction Design", "Storytelling"],
         problemStatement:
-          "Households in India face high utility bills due to limited consumption insights...",
+          "In India, households often struggle with high utility bills due to a lack of detailed consumption insights. Standard bills only provide cumulative energy usage and cost figures, leaving users without specific energy-saving guidance or clarity on which appliances consume the most power.Additionally, while some smart devices offer automation and remote control, they don’t provide cost estimates, monthly spending projections, or energy reduction recommendations. Users are left guessing how to lower their bills and end up taking broad, ineffective measures.",
         solutionOverview:
-          "Urja solves these challenges by offering detailed energy usage data...",
+          "Urja addresses these challenges by offering users comprehensive insights into their energy consumption, with features like detailed usage data and real-time cost tracking. The app empowers users to control and automate their home appliances remotely, enabling scheduling routines that align with energy-saving goals. Additionally, Urja provides personalized tips and timely notifications, helping users make adjustments that can lead to substantial energy and cost savings. By allowing users to set and manage specific energy and spending targets, Urja fosters proactive energy management, making it easier for households to reduce both their environmental footprint and monthly bills.",
         researchInsights: [
           {
             title: "User Survey",
             content:
-              "47% of respondents expressed dissatisfaction with their current bills...",
+              "A Google Forms survey was conducted among 28 people to understand energy consumption habits, satisfaction levels, and openness to an energy-monitoring solution.",
+            subPoints: [
+              "47% of respondents were dissatisfied with their current power usage and monthly bills",
+              "80% had no way to check individual device energy consumption",
+              "Many users admitted to forgetting to turn off high-energy appliances, leading to avoidable power usage",
+              "100% expressed interest in a monitoring app that would save money and power, with 89% open to purchasing compatible smart devices",
+            ],
+            image: "/images/urja_survey.png",
           },
           {
             title: "User Persona",
             content:
-              "A cost-conscious homeowner aiming to reduce energy use...",
+              "Based on our survey responses, we created a user persona representing a consumer who seeks a solution for detailed insights into home utility usage to improve financial planning and enhance energy savings.",
+            image: "/images/urja_persona.png",
+          },
+          {
+            title: "Empathy Mapping",
+            content:
+              "Exploring the emotions, needs, and experiences, further resonating with our energy consumers, we conducted empathy mapping.",
+            image: "/images/urja_empathy.png",
+          },
+          {
+            title: "Competitive Analysis",
+            content:
+              "We evaluated existing smart home and energy-monitoring solutions to identify strengths and weaknesses, finding that many lacked real-time cost tracking and specific insights into high-energy appliances.",
+            image: "/images/urja_competition.png",
           },
         ],
         objectives: [
-          "Provide household and device-level energy usage insights.",
-          "Enable remote control and scheduling of appliances.",
+          "Visual report of energy usage to get readings of how their house operates and gain intuition about power consumption",
+          "Users can control appliances and gadgets from anywhere with just one click.",
+          "Tracking energy consumption costs in real time will allow users to watch as their electricity consumption and costs increase or decrease.",
+          "Users can define energy usage and spending targets to generate and manage the monthly household budgets and avoid unexpected expenses.",
+          "Users can create automation with routines, to streamline their lives and also be sure that they’re conserving energy and saving money.",
+          "Notifications for energy efficiency to remind the user about his energy usage activities and enable him to take instant actions in this respect.",
         ],
         designProcess: [
           {
+            title: "Information Architecture",
+            image: "/images/urja_ia.png",
+          },
+          {
             title: "User Flow & Wireframes",
-            content: "Created low-fidelity sketches for key features...",
+            image: "/images/urja_lo_1.png",
           },
           {
             title: "Style Guide",
-            content:
-              "Established a cohesive interface with consistent color schemes...",
+            image: "/images/urja_style_guide.png",
           },
         ],
         keyFeatures: [
           {
-            title: "Homepage",
+            title: "A) Homepage",
             content:
-              "Summarizes energy usage with quick control options for appliances.",
+              "Homepage consisting of personalised energy consumptions. User can turn OFF all devices in just one click. This page also gives access to most used devices and rooms for quick access.",
           },
           {
-            title: "My Rooms",
-            content: "Allows users to manage energy for specific rooms.",
+            title: "B) My Rooms",
+            content:
+              "My Rooms page lists down all the rooms. User can turn OFF all devices of the room, check the energy consumption of the room and edit rooms.",
+          },
+          {
+            title: "C & D) Room page",
+            content:
+              "Room page lists the devices of the room and allows the user to control devices in the room. The page lists the device events. It displays the energy consumption and approximate energy cost of the room.",
+            image: "/images/urja_hi_1.png",
+          },
+          {
+            title: "E) Device OFF",
+            content:
+              "Device OFF page allows the user to view the device statistics and edit the device. Device ON page displays the device settings like temperature settings, schedule settings, modes, etc.",
+            image: "/images/urja_hi_2.png",
+          },
+          {
+            title: "F) My Energy Stats",
+            content:
+              "My Energy Stats is displays the energy consumption data where users can see energy usage in details, with statistics showing when the home has been consuming lot’s of energy, how much energy and how much it costs. The users can compare their consumption to the ideal consumption.",
+          },
+          {
+            title: "G) Payments page",
+            content:
+              "Payments page lists the bill details. It applies the reward discounts on the bill amount and makes energy bill payments easy. User can compare previous bills to keep track of their consumptions.",
+          },
+          {
+            title: "H) Payments page",
+            content:
+              "Save Energy tips page allows users to calculate their device’s load and energy consumption. Also, suggest some tips to save energy.",
+            image: "/images/urja_hi_3.png",
+          },
+          {
+            title: "I) Goals",
+            content:
+              "Goals lists down the goals and its status. Goals help to define milestones to control and compare energy usage. The overarching objective is to motivate users to adopt energy-efficient practices through a reward system, thereby contributing to a substantial reduction in both environmental impact and monthly expenses.",
+          },
+          {
+            title: "J) Set A Goal",
+            content:
+              "Set A Goal allows users to set goals contributing to save energy.",
+          },
+          {
+            title: "K) Notifications",
+            content:
+              "Users get notifications for devices left turned on or tips for more energy usage reduction.",
           },
         ],
         retrospective:
-          "Urja empowers users to adopt efficient energy habits, achieving up to 10% in annual savings...",
+          "Urja aims to make home energy monitoring accessible and actionable, enabling users to manage their energy consumption with a single tap. By offering comprehensive insights down to individual devices, Urja empowers users to adopt more efficient habits, saving an estimated 10% on annual power bills, with potential for higher savings among engaged users.Urja provides a timely solution for household energy conservation, addressing rising electricity costs and environmental concerns by promoting efficient, mindful energy usage.",
       },
     },
     {
@@ -135,54 +205,101 @@ const Portfolio = () => {
       tags: ["UI Design", "Web Development", "Transport"],
       details: {
         overview:
-          "The UTS app redesign focuses on improving user experience in ticket booking...",
+          "The Unreserved Ticketing System (UTS) app by Indian Railways facilitates unreserved ticket booking, providing users with a contactless, paperless alternative to physical ticket counters. The UTS app redesign focuses on creating a user-centered experience to streamline ticket booking, improve usability, and address frustrations with navigation, payment issues, and outdated design.",
         timeline: "April 2022 - May 2022",
         tools: "Figma",
         contributions: ["User Research", "Interaction Design", "Storytelling"],
-        problemStatement: "The existing UTS app faced usability challenges...",
+        problemStatement:
+          "Despite its convenience, the UTS app faced significant usability challenges that impacted the user experience, as revealed through commuter research. The ticket booking process had a complex navigation flow that created confusion, making it difficult for users to complete bookings seamlessly. Additionally, the app’s lengthy and cumbersome login and registration steps discouraged new users, posing a barrier to adoption. Payment issues were also prevalent, with frequent transaction errors and limited feedback on payment status, leading to frustration and dissatisfaction. Furthermore, the outdated interface, lacking in modern aesthetics, made it harder for users to intuitively understand and navigate the app’s functions, emphasizing the need for a design overhaul to enhance clarity and usability",
         solutionOverview:
-          "The redesign aimed to streamline the booking process...",
+          "The UTS app redesign focuses on enhancing usability and creating a seamless experience that guides users effortlessly from login to ticket booking. To achieve this, the booking process has been streamlined, allowing for easier navigation and reducing the number of steps required to complete a booking. The registration and login procedures have been simplified to encourage new users and make the onboarding process quicker. Additionally, improvements to the payment process provide instant feedback, reducing transaction errors and enhancing user confidence. The overall user interface has been updated with a modern and intuitive design, making the app more visually appealing and easier to navigate.",
         researchInsights: [
           {
             title: "Domain Research",
             content:
-              "Identified UTS’s role in simplifying digital ticketing...",
+              "We studied the UTS app’s role in simplifying ticket purchases for Indian Railways' daily commuters, focusing on digital and contactless ticketing benefits. The goal was to eliminate physical queues by providing a convenient online booking solution.Key Objectives:",
+            subPoints: [
+              "Simplified ticket booking experience.",
+              "Easy, cashless transactions.",
+              "Environmentally friendly, paperless options for all railway zones and sections​",
+            ],
           },
           {
             title: "User Research",
             content:
-              "Surveys and interviews with users aged 19 to 46 revealed frustrations...",
+              "A survey and interviews were conducted among users aged 19 to 46 to understand their needs, frustrations, and expectations. Key Findings:",
+            subPoints: [
+              "Users often found the navigation unclear, resulting in errors or slow bookings.",
+              "Many users found registration and login overly complex, impacting adoption rates.",
+              "Frequent transaction errors and lack of refund clarity caused dissatisfaction.​",
+              "Avoiding long queues and utilizing cashless payments were primary motivators for app use.​",
+            ],
+          },
+          {
+            title: "User Persona",
+            content:
+              "Based on our survey responses, we created a user persona representing a consumer who seeks a solution for detailed insights into home utility usage to improve financial planning and enhance energy savings.",
+            image: "/images/uts_persona.png",
+          },
+          {
+            title: "Empathy Mapping",
+            content:
+              "Exploring the emotions, needs, and experiences, further resonating with our energy consumers, we conducted empathy mapping.",
+            image: "/images/uts_empathy.png",
+          },
+          {
+            title: "Competitive Analysis",
+            content:
+              "In the case of the UTS app, there are no direct competitors as it is the only official app available to book the suburban and long-distance unreserved tickets. ",
           },
         ],
         objectives: [
-          "Streamlined ticket booking process with fewer steps.",
-          "Simplified login and registration for smoother onboarding.",
+          "Streamlined Ticket Booking: A quicker, more intuitive booking process with fewer steps",
+          "Effortless Login: Simplified login and registration for a smooth onboarding experience.",
+          "Reliable Payments: Robust payment processing with clear status updates and refund tracking.",
+          "Updated User Interface: A fresh, modern UI with easy navigation and improved accessibility.",
         ],
         designProcess: [
           {
             title: "User Flow & Wireframes",
-            content:
-              "Developed low-fidelity sketches for logical booking flows.",
+            image: "/images/uts_lo_1.jpeg",
           },
           {
             title: "Style Guide",
-            content:
-              "Created a cohesive guide for color schemes, typography...",
+            image: "/images/uts_style_guide.png",
           },
         ],
         keyFeatures: [
           {
             title: "Homepage",
-            content: "Quick access to ticket booking and past journeys...",
+            content:
+              "Displays options for quick access to ticket booking, past journeys, and personalized recommendations for commonly traveled routes.",
           },
           {
             title: "Login & Registration",
             content:
+              " A restructured booking interface with clear steps, from choosing routes and travel times to final confirmation, ensuring a seamless experience",
+            image: "/images/uts_hi_1.png",
+          },
+          {
+            title: "Ticket Booking",
+            content:
               "Simplified onboarding for quicker access to core functions.",
+          },
+          {
+            title: "Ticket Summary & Payment",
+            content:
+              "Provides a clear summary of the journey details, and secure payment processing with immediate confirmation, status updates, and refund options if needed.",
+          },
+          {
+            title: "My Tickets",
+            content:
+              "Displays all active, past, and upcoming journeys, enabling users to view ticket details quickly and manage or cancel bookings as required.",
+            image: "/images/uts_hi_2.png",
           },
         ],
         retrospective:
-          "The redesigned UTS app offers a more user-friendly, efficient ticket booking experience...",
+          "The redesigned UTS app simplifies ticket booking and offers a more responsive, user-friendly experience. By providing smoother navigation, modern design, and reliable payments, the app makes unreserved ticket booking easier and faster for Indian Railways' commuters. This redesign anticipates a substantial improvement in user satisfaction and app adoption rates, reducing reliance on physical ticket counters and contributing to a more efficient ticketing process for millions of daily users.",
       },
     },
     {
@@ -198,24 +315,14 @@ const Portfolio = () => {
         tools: "Figma, Adobe XD",
         contributions: ["UI/UX Design", "User Research", "Prototyping"],
         problemStatement:
-          "The previous DJSCE website had an outdated design, making navigation difficult for users...",
+          "The previous DJSCE website had an outdated design, making navigation difficult for users.",
         solutionOverview:
-          "The redesign addressed usability, navigation, and visual appeal, aligning with the needs of students and faculty...",
+          "The redesign addressed usability, navigation, and visual appeal, aligning with the needs of students and faculty.",
         researchInsights: [
           {
-            title: "User Interviews",
+            title: "Stakeholders discussion",
             content:
-              "Conducted interviews with students and staff to identify pain points...",
-          },
-          {
-            title: "Persona Development",
-            content:
-              "Created personas to represent different types of users like students, faculty...",
-          },
-          {
-            title: "Usability Testing",
-            content:
-              "Tested prototypes with target users to ensure intuitive navigation...",
+              "Conducted interviews with stakeholders from college management to get their perspective and feedback",
           },
         ],
         objectives: [
@@ -224,11 +331,6 @@ const Portfolio = () => {
           "Modernize visual design to align with current web standards.",
         ],
         designProcess: [
-          {
-            title: "Wireframes",
-            content:
-              "Developed wireframes to outline core navigation and layout changes.",
-          },
           {
             title: "UI Prototyping",
             content:
@@ -240,20 +342,17 @@ const Portfolio = () => {
             title: "Home Page",
             content:
               "Highlights key information, news, and updates for students and visitors.",
+            image: "/images/djsce_homescreen.png",
           },
           {
             title: "Departments",
             content:
               "Organized information on academic departments for easier access to relevant resources.",
-          },
-          {
-            title: "Student Portal",
-            content:
-              "Integrated a user-friendly portal for students to access academic resources and schedules.",
+            image: "/images/djsce_department.png",
           },
         ],
         retrospective:
-          "The redesign resulted in a more accessible, visually appealing, and functional website, improving satisfaction among students and staff.",
+          "The redesign resulted in a more accessible, visually appealing, and functional website, improving satisfaction among students and staff.The new website is available at www.djsce.ac.in",
       },
     },
     {
@@ -613,7 +712,7 @@ const Portfolio = () => {
                 <div>
                   {" "}
                   <p className="text-gray-600 mb-4 font-bold">
-                    Files & Certificates
+                    Files, Awards & Certificates
                   </p>
                 </div>
                 <div className="flex space-x-2 mt-2">
@@ -744,7 +843,7 @@ const Portfolio = () => {
               </div>
 
               {/* Detailed Sections */}
-              <h4 className="text-xl font-bold text-gray-900 mb-4">
+              <h4 className="text-xl font-bold text-gray-1900 mb-4">
                 Project Overview
               </h4>
               <p className="text-gray-600 mb-4">
@@ -764,7 +863,7 @@ const Portfolio = () => {
               </div>
 
               {/* Problem Statement */}
-              <h4 className="font-bold text-gray-900 mb-4">
+              <h4 className="text-xl font-bold text-gray-1900 mb-4">
                 Problem Statement
               </h4>
               <p className="text-gray-600 mb-8">
@@ -772,7 +871,7 @@ const Portfolio = () => {
               </p>
 
               {/* Solution Overview */}
-              <h4 className="font-bold text-gray-900 mb-4">
+              <h4 className="text-xl font-bold text-gray-1900 mb-4">
                 Solution Overview
               </h4>
               <p className="text-gray-600 mb-8">
@@ -780,57 +879,157 @@ const Portfolio = () => {
               </p>
 
               {/* Research & Insights */}
-              <h4 className="font-bold text-gray-900 mb-4">
+              <h4 className="text-xl font-bold text-gray-1900 mb-4">
                 Research & Insights
               </h4>
-              <ul className="text-gray-600 list-disc list-inside mb-8 space-y-4">
+              <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-3">
                 {activeProject.details.researchInsights.map(
                   (insight, index) => (
-                    <li key={index}>
-                      <strong>{insight.title}:</strong> {insight.content}
+                    <li key={index} className="space-y-2">
+                      <div className="font-bold">{insight.title}</div>{" "}
+                      {/* Title in bold */}
+                      <div>{insight.content}</div> {/* Content */}
+                      {/* Render subPoints as bullet points if they exist */}
+                      {insight.subPoints && insight.subPoints.length > 0 && (
+                        <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-3">
+                          {insight.subPoints.map((point, i) => (
+                            <li key={i}>{point}</li>
+                          ))}
+                        </ul>
+                      )}
+                      {/* Conditionally render image if available */}
+                      {insight.image && (
+                        <div className="mt-2">
+                          <img
+                            src={insight.image}
+                            alt={`${insight.title} image`}
+                            className="w-full h-auto"
+                          />
+                        </div>
+                      )}
                     </li>
                   )
                 )}
               </ul>
 
               {/* Objectives */}
-              <h4 className="font-bold text-gray-900 mb-4">
+              <h4 className="text-xl font-bold text-gray-1900 mb-4">
                 Defining the Objectives
               </h4>
-              <ul className="text-gray-600 list-disc list-inside mb-8 space-y-4">
+              <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-3">
                 {activeProject.details.objectives.map((objective, index) => (
                   <li key={index}>{objective}</li>
                 ))}
               </ul>
 
               {/* Design & Development Process */}
-              <h4 className="font-bold text-gray-900 mb-4">
+              <h4 className="text-xl font-bold text-gray-900 mb-4">
                 Design & Development Process
               </h4>
-              <ul className="text-gray-600 list-disc list-inside mb-8 space-y-4">
+              <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-6">
+                {" "}
+                {/* Increased space-y for better separation */}
                 {activeProject.details.designProcess.map((step, index) => (
-                  <li key={index}>
-                    <strong>{step.title}:</strong> {step.content}
+                  <li key={index} className="space-y-3">
+                    {" "}
+                    {/* Added space-y for consistent spacing within each item */}
+                    <div className="font-bold">{step.title}</div>{" "}
+                    {/* Title in bold */}
+                    <div>{step.content}</div> {/* Content */}
+                    {/* Render subPoints as bullet points if they exist */}
+                    {step.subPoints && step.subPoints.length > 0 ? (
+                      <ul className="list-disc list-inside ml-4 space-y-1">
+                        {" "}
+                        {/* Spacing between subpoints */}
+                        {step.subPoints.map((point, i) => (
+                          <li key={i}>{point}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      /* Add margin-top if no subPoints */
+                      step.image && (
+                        <div className="mt-4">
+                          {" "}
+                          <img
+                            src={step.image}
+                            alt={`${step.title} image`}
+                            className="w-full h-auto mt-8"
+                          />{" "}
+                          {/* Added mt-2 for extra padding below content */}
+                        </div>
+                      )
+                    )}
                   </li>
                 ))}
               </ul>
 
               {/* Key Screens and Features */}
-              <h4 className="font-bold text-gray-900 mb-4">
+              {/* Key Screens and Features */}
+              <h4 className="text-xl font-bold text-gray-900 mb-4">
                 Key Screens and Features
               </h4>
-              <ul className="text-gray-600 list-disc list-inside mb-8 space-y-4">
+              <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-6">
+                {" "}
+                {/* Increased space-y for better separation between features */}
                 {activeProject.details.keyFeatures.map((feature, index) => (
-                  <li key={index}>
-                    <strong>{feature.title}:</strong> {feature.content}
+                  <li key={index} className="space-y-3">
+                    {" "}
+                    {/* Added space-y for consistent spacing within each feature */}
+                    <div className="font-bold">{feature.title}</div>{" "}
+                    {/* Title in bold */}
+                    <div>{feature.content}</div> {/* Content */}
+                    {/* Render subPoints as bullet points if they exist */}
+                    {feature.subPoints && feature.subPoints.length > 0 ? (
+                      <ul className="list-disc list-inside ml-4 space-y-1">
+                        {" "}
+                        {/* Spacing between subpoints */}
+                        {feature.subPoints.map((point, i) => (
+                          <li key={i}>{point}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      /* Add margin-top if no subPoints */
+                      feature.image && (
+                        <div className="mt-4">
+                          {" "}
+                          {/* Ensuring spacing above the image */}
+                          <img
+                            src={feature.image}
+                            alt={`${feature.title} image`}
+                            className="w-full h-auto mt-2"
+                          />{" "}
+                          {/* Added mt-2 for extra padding below content */}
+                        </div>
+                      )
+                    )}
                   </li>
                 ))}
               </ul>
 
               {/* Retrospective */}
-              <h4 className="font-bold text-gray-900 mb-4">Retrospective</h4>
+              <h4 className="text-xl font-bold text-gray-900 mb-4">
+                Retrospective
+              </h4>
               <p className="text-gray-600 mb-8">
-                {activeProject.details.retrospective}
+                {activeProject.details.retrospective
+                  .split(" ")
+                  .map((word, index) =>
+                    word.startsWith("http") || word.startsWith("www.") ? (
+                      <a
+                        key={index}
+                        href={
+                          word.startsWith("http") ? word : `https://${word}`
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 underline"
+                      >
+                        {word}
+                      </a>
+                    ) : (
+                      `${word} `
+                    )
+                  )}
               </p>
             </div>
           </div>
