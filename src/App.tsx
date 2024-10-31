@@ -684,22 +684,22 @@ const Portfolio = () => {
                 </h3>
                 <ul className="space-y-4">
                   <li className="flex items-start">
-                    <Target className="h-5 w-5 text-gray-900 mt-1 mr-3" />
-                    <p className="text-gray-600">
+                    <Target className="h-6 w-6 text-gray-900 mt-0.5 mr-4 flex-shrink-0" />
+                    <p className="text-gray-600 leading-relaxed">
                       Second place in Belden's global hackathon for Gen AI
                       Copilot tool
                     </p>
                   </li>
                   <li className="flex items-start">
-                    <BookOpen className="h-5 w-5 text-gray-900 mt-1 mr-3" />
-                    <p className="text-gray-600">
+                    <BookOpen className="h-6 w-6 text-gray-900 mt-0.5 mr-4 flex-shrink-0" />
+                    <p className="text-gray-600 leading-relaxed">
                       Published research in International Conference on Advanced
                       Computing Technologies
                     </p>
                   </li>
                   <li className="flex items-start">
-                    <Award className="h-5 w-5 text-gray-900 mt-1 mr-3" />
-                    <p className="text-gray-600">
+                    <Award className="h-6 w-6 text-gray-900 mt-0.5 mr-4 flex-shrink-0" />
+                    <p className="text-gray-600 leading-relaxed">
                       Mentored and Judged for Pixel Paranoia, a UI &
                       Design-centric hackathon hosted by Dwarkadas J. Sanghvi
                       College of Engineering, guiding over 50+ participants
