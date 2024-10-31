@@ -440,34 +440,56 @@ const Portfolio = () => {
 
   const skills = [
     {
-      category: "Design",
+      category: "Design Tools",
       items: [
-        "UI Design",
-        "UX Design",
-        "Wireframing",
-        "Prototyping",
-        "User Research",
+        "Figma",
+        "Sketch",
+        "Miro",
+        "Canva",
+        "Axure",
+        "Adobe Creative Suite (Photoshop, Illustrator, InDesign, XD)",
+        "Invision",
+        "CMS (WordPress, Wix, Webflow, Framer)",
       ],
     },
     {
-      category: "Development",
-      items: ["React JS", "HTML/CSS", "JavaScript", "Python", "SQL"],
-    },
-    {
-      category: "Tools",
-      items: ["Figma", "Adobe XD", "Git", "SPSS", "Tableau"],
-    },
-    {
-      category: "Research",
+      category: "Design Skills",
       items: [
-        "User Testing",
-        "Heuristic Analysis",
-        "Journey Mapping",
-        "Personas",
+        "Wireframing",
+        "Prototyping",
+        "User Flows",
+        "Interaction Design",
+        "Usability Testing",
+        "Visual Design",
+        "Mobile and Web App Design",
+        "Responsive Design",
+        "Accessibility Design",
+      ],
+    },
+    {
+      category: "User Research & Testing",
+      items: [
+        "User Interviews",
+        "Surveys",
+        "Usability Testing",
+        "A/B Testing",
+        "Data Synthesis",
+        "User Feedback Analysis",
+      ],
+    },
+    {
+      category: "Programming Languages & Technologies",
+      items: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React.js",
+        "Python",
+        "SQL",
       ],
     },
   ];
-
+  
   useEffect(() => {
     const sections = [
       document.querySelector(".hero-section"),
