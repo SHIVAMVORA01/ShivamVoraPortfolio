@@ -336,7 +336,7 @@ const Portfolio = () => {
         overview:
           "Redesigning the DJSCE college website to improve user experience and accessibility for students and staff.",
         timeline: "March 2022 - March 2023",
-        tools: "Figma, Adobe XD",
+        tools: "Figma",
         contributions: ["UI/UX Design", "User Research", "Prototyping"],
         problemStatement:
           "The previous DJSCE website had an outdated design, making navigation difficult for users.",
@@ -432,7 +432,7 @@ const Portfolio = () => {
           },
         ],
         retrospective:
-          "The Student Portal provides a centralized, intuitive platform that has significantly reduced the time faculty spend looking for information, improving their LoR writing experience. The website is available at https://djsce-it-student-portal.netlify.app and used by 400+ students.",
+          "The Student Portal provides a centralized, intuitive platform that has significantly reduced the time faculty spend looking for information, improving their LoR writing experience. The website is available at https://djsce-it-student-portal.netlify.app  and used by 400+ students.",
         files: [{ src: "/files/djsce1.pdf", type: "pdf" }],
       },
     },
