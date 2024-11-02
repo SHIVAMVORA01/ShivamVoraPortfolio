@@ -10,15 +10,19 @@ import {
   ArrowUp,
 } from "lucide-react";
 
+import { experiences } from "./components/Experience";
+import { projects } from "./components/Project";
+import { skills } from "./components/Skills";
+import { about, hero } from "./components/About";
+
 const Portfolio = () => {
   const [activeProject, setActiveProject] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeFile, setActiveFile] = useState(null);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
-  const [showTopButton, setShowTopButton] = useState(false); // State for back-to-top button visibility
+  const [showTopButton, setShowTopButton] = useState(false);
 
-  // Scroll to top function
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -27,7 +31,6 @@ const Portfolio = () => {
   };
 
   useEffect(() => {
-    // Event listener for scroll to show/hide the back-to-top button
     const handleScroll = () => {
       if (window.scrollY > 300) {
         setShowTopButton(true);
@@ -39,449 +42,6 @@ const Portfolio = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const experiences = [
-    {
-      id: 1,
-      title: "Belden Inc. - R&D Software Developer",
-      period: "June 2023 - Present",
-      description: [
-        "Spearheaded research on the integration of two project management tools into a single unified system, delivering enhanced project tracking efficiency and reducing costs by 80%.",
-        "Developed and deployed a SharePoint portal and automated KPI tracking for the PMO, reducing manual reporting by 30% and improving financial visibility and resource management.",
-        "Built a Gen AI Copilot tool to solve basic L1 tickets, increasing sales process efficiency by 18%, and won second place in Belden's global hackathon for it.",
-        "Serving as Scrum Master for a 12-member team, increasing sprint velocity by 15% while ensuring strong stakeholder alignment and adherence to Agile best practices.",
-        "Engineered core frontend components in yFiles, React, and MUI for the Unified Tool UX, accelerating UI scalability and reducing development cycles by 25%.",
-      ],
-      files: [
-        { src: "/files/Hackathon.jpg", type: "image" },
-        { src: "/files/Belden.pdf", type: "pdf" },
-      ],
-    },
-    {
-      id: 2,
-      title: "AICAN - User Experience and Research Intern",
-      period: "September 2021 - November 2021",
-      description: [
-        "Conducted user research, including interviews and surveys, to understand user needs and pain points. Analyzed data to identify design opportunities and improve user interactions with smart controllers, enhancing the overall user experience.",
-        "Created intuitive, user-friendly dashboards using data visualization best practices to display real-time data, enabling users to monitor device performance and control operations efficiently. Worked closely with developers to ensure seamless integration and optimal performance of the dashboard features.",
-      ],
-      files: [{ src: "/files/Aican.pdf", type: "pdf" }],
-    },
-    {
-      id: 3,
-      title: "The Breakout Hunt - User Experience Intern",
-      period: "June 2021 - August 2021",
-      description: [
-        "Performed in-depth competitor benchmarking to identify gaps and areas for improvement in user experience. Designed and distributed user surveys to gather feedback on app usability, leading to actionable insights that informed UX design improvements and helped align features with user expectations.",
-        "Worked closely with the development team to implement UX design changes based on research findings. Assisted in the iterative design process, including prototyping and testing, to ensure a smooth user flow and visual consistency. Contributed to a successful app launch, enhancing accessibility and satisfaction, with the app now publicly available on Google Playstore.",
-      ],
-      files: [{ src: "/files/BreakoutHunt.pdf", type: "pdf" }],
-    },
-    {
-      id: 4,
-      title: "CDAC - Web Design Developer",
-      period: "July 2020 - April 2021",
-      description: [
-        "Collaborated with the Ministry of Electronics & IT to develop OLABS, a virtual platform that enabled remote STEM education for 10,000+ students during COVID-19.",
-        "Designed and launched a virtual chemistry laboratory environment within OLABS that facilitated practical learning for students in remote setups, reaching over 150 schools across India.",
-      ],
-      files: [{ src: "/files/CDAC.pdf", type: "pdf" }],
-    },
-  ];
-
-  const projects = [
-    {
-      id: 1,
-      title:
-        "Urja: The Pocket Energy-saving App (Young Designer's League Finalists 2022)",
-      description: "Transforming people's energy conservation habits.",
-      image: "/images/Urja.png",
-      tags: ["Research", "UI Design", "Prototyping"],
-      details: {
-        overview:
-          "Urja empowers users with real-time insights into appliance usage, notifications for high-energy devices, and personalized energy-saving tips to reduce their carbon footprint and lower electricity bills.",
-        timeline: "October 2022 - November 2022",
-        tools: "Figma",
-        contributions: ["User Research", "Interaction Design", "Storytelling"],
-        problemStatement:
-          "In India, households often struggle with high utility bills due to a lack of detailed consumption insights. Standard bills only provide cumulative energy usage and cost figures, leaving users without specific energy-saving guidance or clarity on which appliances consume the most power. Additionally, while some smart devices offer automation and remote control, they don’t provide cost estimates, monthly spending projections, or energy reduction recommendations. Users are left guessing how to lower their bills and end up taking broad, ineffective measures.",
-        solutionOverview:
-          "Urja addresses these challenges by offering users comprehensive insights into their energy consumption, with features like detailed usage data and real-time cost tracking. The app empowers users to control and automate their home appliances remotely, enabling scheduling routines that align with energy-saving goals. Additionally, Urja provides personalized tips and timely notifications, helping users make adjustments that can lead to substantial energy and cost savings. By allowing users to set and manage specific energy and spending targets, Urja fosters proactive energy management, making it easier for households to reduce both their environmental footprint and monthly bills.",
-        researchInsights: [
-          {
-            title: "User Survey",
-            content:
-              "A Google Forms survey was conducted among 28 people to understand energy consumption habits, satisfaction levels, and openness to an energy-monitoring solution.",
-            subPoints: [
-              "47% of respondents were dissatisfied with their current power usage and monthly bills.",
-              "80% had no way to check individual device energy consumption.",
-              "Many users admitted to forgetting to turn off high-energy appliances, leading to avoidable power usage.",
-              "100% expressed interest in a monitoring app that would save money and power, with 89% open to purchasing compatible smart devices.",
-            ],
-            image: "/images/urja_survey.png",
-          },
-          {
-            title: "User Persona",
-            content:
-              "Based on our survey responses, we created a user persona representing a consumer who seeks a solution for detailed insights into home utility usage to improve financial planning and enhance energy savings.",
-            image: "/images/urja_persona.png",
-          },
-          {
-            title: "Empathy Mapping",
-            content:
-              "Exploring the emotions, needs, and experiences, further resonating with our energy consumers, we conducted empathy mapping.",
-            image: "/images/urja_empathy.png",
-          },
-          {
-            title: "Competitive Analysis",
-            content:
-              "We evaluated existing smart home and energy-monitoring solutions to identify strengths and weaknesses, finding that many lacked real-time cost tracking and specific insights into high-energy appliances.",
-            image: "/images/urja_competition.png",
-          },
-        ],
-        objectives: [
-          "Visual report of energy usage to get readings of how their house operates and gain intuition about power consumption.",
-          "Users can control appliances and gadgets from anywhere with just one click.",
-          "Tracking energy consumption costs in real time will allow users to watch as their electricity consumption and costs increase or decrease.",
-          "Users can define energy usage and spending targets to generate and manage the monthly household budgets and avoid unexpected expenses.",
-          "Users can create automation with routines, to streamline their lives and also be sure that they’re conserving energy and saving money.",
-          "Notifications for energy efficiency to remind the user about their energy usage activities and enable them to take instant actions in this respect.",
-        ],
-        designProcess: [
-          {
-            title: "Information Architecture",
-            image: "/images/urja_ia.png",
-          },
-          {
-            title: "User Flow & Wireframes",
-            image: "/images/urja_lo_1.png",
-          },
-          {
-            title: "Style Guide",
-            image: "/images/urja_style_guide.png",
-          },
-        ],
-        keyFeatures: [
-          {
-            title: "A) Homepage",
-            content:
-              "Homepage consisting of personalised energy consumptions. User can turn OFF all devices in just one click. This page also gives access to most used devices and rooms for quick access.",
-          },
-          {
-            title: "B) My Rooms",
-            content:
-              "My Rooms page lists down all the rooms. User can turn OFF all devices of the room, check the energy consumption of the room, and edit rooms.",
-          },
-          {
-            title: "C & D) Room page",
-            content:
-              "Room page lists the devices of the room and allows the user to control devices in the room. The page lists the device events. It displays the energy consumption and approximate energy cost of the room.",
-            image: "/images/urja_hi_1.png",
-          },
-          {
-            title: "E) Device OFF",
-            content:
-              "Device OFF page allows the user to view the device statistics and edit the device. Device ON page displays the device settings like temperature settings, schedule settings, modes, etc.",
-            image: "/images/urja_hi_2.png",
-          },
-          {
-            title: "F) My Energy Stats",
-            content:
-              "My Energy Stats displays the energy consumption data where users can see energy usage in detail, with statistics showing when the home has been consuming lots of energy, how much energy, and how much it costs. The users can compare their consumption to the ideal consumption.",
-          },
-          {
-            title: "G) Payments page",
-            content:
-              "Payments page lists the bill details. It applies the reward discounts on the bill amount and makes energy bill payments easy. Users can compare previous bills to keep track of their consumptions.",
-          },
-          {
-            title: "H) Save Energy Tips",
-            content:
-              "Save Energy tips page allows users to calculate their device’s load and energy consumption, also suggesting some tips to save energy.",
-            image: "/images/urja_hi_3.png",
-          },
-          {
-            title: "I) Goals",
-            content:
-              "Goals lists down the goals and their status. Goals help to define milestones to control and compare energy usage. The overarching objective is to motivate users to adopt energy-efficient practices through a reward system, thereby contributing to a substantial reduction in both environmental impact and monthly expenses.",
-          },
-          {
-            title: "J) Set A Goal",
-            content:
-              "Set A Goal allows users to set goals contributing to save energy.",
-          },
-          {
-            title: "K) Notifications",
-            content:
-              "Users get notifications for devices left turned on or tips for more energy usage reduction.",
-          },
-        ],
-        retrospective:
-          "Urja aims to make home energy monitoring accessible and actionable, enabling users to manage their energy consumption with a single tap. By offering comprehensive insights down to individual devices, Urja empowers users to adopt more efficient habits, saving an estimated 10% on annual power bills, with potential for higher savings among engaged users. Urja provides a timely solution for household energy conservation, addressing rising electricity costs and environmental concerns by promoting efficient, mindful energy usage.",
-      },
-    },
-    {
-      id: 2,
-      title: "UTS App Redesign",
-      description:
-        "Enhancing Unreserved Ticketing Experience for Indian Railways.",
-      image: "/images/UTS.png",
-      tags: ["UI Design", "Web Development", "Transport"],
-      details: {
-        overview:
-          "The Unreserved Ticketing System (UTS) app by Indian Railways facilitates unreserved ticket booking, providing users with a contactless, paperless alternative to physical ticket counters. The UTS app redesign focuses on creating a user-centered experience to streamline ticket booking, improve usability, and address frustrations with navigation, payment issues, and outdated design.",
-        timeline: "April 2022 - May 2022",
-        tools: "Figma",
-        contributions: ["User Research", "Interaction Design", "Storytelling"],
-        problemStatement:
-          "Despite its convenience, the UTS app faced significant usability challenges that impacted the user experience, as revealed through commuter research. The ticket booking process had a complex navigation flow that created confusion, making it difficult for users to complete bookings seamlessly. Additionally, the app’s lengthy and cumbersome login and registration steps discouraged new users, posing a barrier to adoption. Payment issues were also prevalent, with frequent transaction errors and limited feedback on payment status, leading to frustration and dissatisfaction. Furthermore, the outdated interface, lacking in modern aesthetics, made it harder for users to intuitively understand and navigate the app’s functions, emphasizing the need for a design overhaul to enhance clarity and usability.",
-        solutionOverview:
-          "The UTS app redesign focuses on enhancing usability and creating a seamless experience that guides users effortlessly from login to ticket booking. To achieve this, the booking process has been streamlined, allowing for easier navigation and reducing the number of steps required to complete a booking. The registration and login procedures have been simplified to encourage new users and make the onboarding process quicker. Additionally, improvements to the payment process provide instant feedback, reducing transaction errors and enhancing user confidence. The overall user interface has been updated with a modern and intuitive design, making the app more visually appealing and easier to navigate.",
-        researchInsights: [
-          {
-            title: "Domain Research",
-            content:
-              "We studied the UTS app’s role in simplifying ticket purchases for Indian Railways' daily commuters, focusing on digital and contactless ticketing benefits. The goal was to eliminate physical queues by providing a convenient online booking solution. Key Objectives:",
-            subPoints: [
-              "Simplified ticket booking experience.",
-              "Easy, cashless transactions.",
-              "Environmentally friendly, paperless options for all railway zones and sections.",
-            ],
-          },
-          {
-            title: "User Research",
-            content:
-              "A survey and interviews were conducted among users aged 19 to 46 to understand their needs, frustrations, and expectations. Key Findings:",
-            subPoints: [
-              "Users often found the navigation unclear, resulting in errors or slow bookings.",
-              "Many users found registration and login overly complex, impacting adoption rates.",
-              "Frequent transaction errors and lack of refund clarity caused dissatisfaction.",
-              "Avoiding long queues and utilizing cashless payments were primary motivators for app use.",
-            ],
-          },
-          {
-            title: "User Persona",
-            content:
-              "Based on our survey responses, we created a user persona representing a commuter who requires an easy-to-use, efficient ticket booking solution.",
-            image: "/images/uts_persona.png",
-          },
-          {
-            title: "Empathy Mapping",
-            content:
-              "Exploring the emotions, needs, and experiences, further resonating with our energy consumers, we conducted empathy mapping.",
-            image: "/images/uts_empathy.png",
-          },
-          {
-            title: "Competitive Analysis",
-            content:
-              "In the case of the UTS app, there are no direct competitors as it is the only official app available to book the suburban and long-distance unreserved tickets.",
-          },
-        ],
-        objectives: [
-          "Streamlined Ticket Booking: A quicker, more intuitive booking process with fewer steps.",
-          "Effortless Login: Simplified login and registration for a smooth onboarding experience.",
-          "Reliable Payments: Robust payment processing with clear status updates and refund tracking.",
-          "Updated User Interface: A fresh, modern UI with easy navigation and improved accessibility.",
-        ],
-        designProcess: [
-          {
-            title: "User Flow & Wireframes",
-            image: "/images/uts_lo_1.jpeg",
-          },
-          {
-            title: "Style Guide",
-            image: "/images/uts_style_guide.png",
-          },
-        ],
-        keyFeatures: [
-          {
-            title: "Homepage",
-            content:
-              "Displays options for quick access to ticket booking, past journeys, and personalized recommendations for commonly traveled routes.",
-          },
-          {
-            title: "Login & Registration",
-            content:
-              "A restructured booking interface with clear steps, from choosing routes and travel times to final confirmation, ensuring a seamless experience.",
-            image: "/images/uts_hi_1.png",
-          },
-          {
-            title: "Ticket Booking",
-            content:
-              "Simplified onboarding for quicker access to core functions.",
-          },
-          {
-            title: "Ticket Summary & Payment",
-            content:
-              "Provides a clear summary of the journey details, and secure payment processing with immediate confirmation, status updates, and refund options if needed.",
-          },
-          {
-            title: "My Tickets",
-            content:
-              "Displays all active, past, and upcoming journeys, enabling users to view ticket details quickly and manage or cancel bookings as required.",
-            image: "/images/uts_hi_2.png",
-          },
-        ],
-        retrospective:
-          "The redesigned UTS app simplifies ticket booking and offers a more responsive, user-friendly experience. By providing smoother navigation, modern design, and reliable payments, the app makes unreserved ticket booking easier and faster for Indian Railways' commuters. This redesign anticipates a substantial improvement in user satisfaction and app adoption rates, reducing reliance on physical ticket counters and contributing to a more efficient ticketing process for millions of daily users.",
-      },
-    },
-    {
-      id: 3,
-      title: "College Website Redesign",
-      description: "Complete redesign of DJSCE college website.",
-      image: "/images/DJSCE.png",
-      tags: ["UI/UX", "Web Design", "Education"],
-      details: {
-        overview:
-          "Redesigning the DJSCE college website to improve user experience and accessibility for students and staff.",
-        timeline: "March 2022 - March 2023",
-        tools: "Figma",
-        contributions: ["UI/UX Design", "User Research", "Prototyping"],
-        problemStatement:
-          "The previous DJSCE website had an outdated design, making navigation difficult for users.",
-        solutionOverview:
-          "The redesign addressed usability, navigation, and visual appeal, aligning with the needs of students and faculty.",
-        researchInsights: [
-          {
-            title: "Stakeholders discussion",
-            content:
-              "Conducted interviews with stakeholders from college management to get their perspective and feedback.",
-          },
-        ],
-        objectives: [
-          "Enhance accessibility across devices.",
-          "Simplify navigation for students and faculty to find information quickly.",
-          "Modernize visual design to align with current web standards.",
-        ],
-        designProcess: [
-          {
-            title: "UI Prototyping",
-            content:
-              "Created high-fidelity prototypes showcasing a new visual style and layout.",
-          },
-        ],
-        keyFeatures: [
-          {
-            title: "Home Page",
-            content:
-              "Highlights key information, news, and updates for students and visitors.",
-            image: "/images/djsce_homescreen.png",
-          },
-          {
-            title: "Departments",
-            content:
-              "Organized information on academic departments for easier access to relevant resources.",
-            image: "/images/djsce_department.png",
-          },
-        ],
-        retrospective:
-          "The redesign resulted in a more accessible, visually appealing, and functional website, improving satisfaction among students and staff. The new website is available at www.djsce.ac.in.",
-        files: [{ src: "/files/djsce.pdf", type: "pdf" }],
-      },
-    },
-    {
-      id: 4,
-      title: "Student Portal",
-      description: "A user-friendly portal for student resources.",
-      image: "/images/Student.png",
-      tags: ["UI/UX", "Web Design", "Education"],
-      details: {
-        overview:
-          "Developed the portal to bridge the gap between faculty mentors and students. It acts as a credible source of student information, allowing students to showcase their academia along with their professional and interpersonal skills & ongoing six-monthly progress on this portal.",
-        timeline: "June 2021 - February 2022",
-        tools: "Figma, React",
-        contributions: [
-          "UI/UX Design",
-          "Front-end Development",
-          "User Testing",
-        ],
-        problemStatement:
-          "The faculty mentors faced challenges identifying key skills and expertise of students to write effective LORs for them.",
-        solutionOverview:
-          "This profile portal assists faculty mentors in identifying the key skills and expertise of students to write effective LORs for them. It also gives students a chance to display their academic and professional competence in a well-articulated manner.",
-        researchInsights: [
-          {
-            title: "Survey",
-            content:
-              "Gathered feedback from faculties regarding their experience with existing systems.",
-          },
-        ],
-        objectives: [
-          "Provide a central hub for academic resources and updates.",
-          "Enhance the user experience through intuitive navigation.",
-          "Offer a responsive design accessible across devices.",
-        ],
-        designProcess: [
-          {
-            title: "Prototyping",
-            content:
-              "Developed interactive prototypes to test with student users.",
-          },
-        ],
-        keyFeatures: [
-          {
-            title: "Homepage",
-            content: "Displays information and quick links to resources.",
-            image: "/images/profile_landing_screen.png",
-          },
-          {
-            title: "Basic Profile",
-            content: "Allows users to set their basic profile details.",
-            image: "/images/profile_profilescreen.png",
-          },
-        ],
-        retrospective:
-          "The Student Portal provides a centralized, intuitive platform that has significantly reduced the time faculty spend looking for information, improving their LoR writing experience. The website is available at https://djsce-it-student-portal.netlify.app  and used by 400+ students.",
-        files: [{ src: "/files/djsce1.pdf", type: "pdf" }],
-      },
-    },
-  ];
-
-  const skills = [
-    {
-      category: "Design Tools",
-      items: [
-        "Figma",
-        "Sketch",
-        "Miro",
-        "Canva",
-        "Axure",
-        "Adobe Creative Suite (Photoshop, Illustrator, InDesign, XD)",
-        "Invision",
-        "CMS (WordPress, Wix, Webflow, Framer)",
-      ],
-    },
-    {
-      category: "Design Skills",
-      items: [
-        "Wireframing",
-        "Prototyping",
-        "User Flows",
-        "Interaction Design",
-        "Usability Testing",
-        "Visual Design",
-        "Mobile and Web App Design",
-        "Responsive Design",
-        "Accessibility Design",
-      ],
-    },
-    {
-      category: "User Research & Testing",
-      items: [
-        "User Interviews",
-        "Surveys",
-        "Usability Testing",
-        "A/B Testing",
-        "Data Synthesis",
-        "User Feedback Analysis",
-      ],
-    },
-    {
-      category: "Programming Languages & Technologies",
-      items: ["HTML", "CSS", "JavaScript", "React.js", "Python", "SQL"],
-    },
-  ];
 
   useEffect(() => {
     const sections = [
@@ -602,7 +162,7 @@ const Portfolio = () => {
       {/* Hero Section */}
       <section className="hero-section min-h-screen flex flex-col items-center justify-center bg-blue-50 px-6 pt-20">
         <div className="text-center">
-          <h1 className="hero-title text-gray-900">Hello, I'm Shivam Vora</h1>
+          <h1 className="hero-title text-gray-900">{hero.intro}</h1>
           <div className="flex items-center justify-center mt-6">
             <div className="relative">
               <img
@@ -613,12 +173,10 @@ const Portfolio = () => {
             </div>
           </div>
           <p className="text-xl font-bold text-gray-600 mt-8 max-w-lg mx-auto">
-            Designer by Heart, Coder by Profession
+          {hero.tagline}
           </p>
           <p className="text-xl text-gray-600 mt-8 max-w-lg mx-auto">
-            Creating intuitive digital experiences through thoughtful design and
-            development. Currently working at Belden Inc as an R&D Software
-            Developer.
+          {hero.content}
           </p>
           <div className="flex justify-center space-x-6 mt-6">
             <a
@@ -649,30 +207,24 @@ const Portfolio = () => {
           <div className="grid md:grid-cols-2 gap-12">
             <div>
               <p className="text-gray-600 mb-6">
-                I'm a UI/UX developer with a B.Tech in Information Technology
-                from Dwarkadas J. Sanghvi College of Engineering (CGPA:
-                9.43/10). Currently working at Belden Inc, I specialize in
-                creating user-centered digital experiences that combine
-                aesthetic appeal with functional design.
+              {about.intro1}
               </p>
               <p className="text-gray-600 mb-6">
-                With experience in both design and development, I bridge the gap
-                between user needs and technical implementation, ensuring
-                seamless and intuitive digital solutions.
+              {about.intro2}
               </p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="bg-white p-6 rounded-xl">
                   <Briefcase className="h-6 w-6 text-gray-900 mb-4" />
                   <h3 className="font-bold text-gray-900 mb-2">Experience</h3>
                   <p className="text-gray-600 text-sm">
-                    3+ years in UI/UX and development
+                  {about.experience}
                   </p>
                 </div>
                 <div className="bg-white p-6 rounded-xl">
                   <Award className="h-6 w-6 text-gray-900 mb-4" />
                   <h3 className="font-bold text-gray-900 mb-2">Recognition</h3>
                   <p className="text-gray-600 text-sm">
-                    Published researcher and hackathon winner
+                  {about.recognition}
                   </p>
                 </div>
               </div>
@@ -686,23 +238,19 @@ const Portfolio = () => {
                   <li className="flex items-start">
                     <Target className="h-6 w-6 text-gray-900 mt-0.5 mr-4 flex-shrink-0" />
                     <p className="text-gray-600 leading-relaxed">
-                      Second place in Belden's global hackathon for Gen AI
-                      Copilot tool
+                    {about.achievement1}
                     </p>
                   </li>
                   <li className="flex items-start">
                     <BookOpen className="h-6 w-6 text-gray-900 mt-0.5 mr-4 flex-shrink-0" />
                     <p className="text-gray-600 leading-relaxed">
-                      Published research in International Conference on Advanced
-                      Computing Technologies
+                    {about.achievement2}
                     </p>
                   </li>
                   <li className="flex items-start">
                     <Award className="h-6 w-6 text-gray-900 mt-0.5 mr-4 flex-shrink-0" />
                     <p className="text-gray-600 leading-relaxed">
-                      Mentored and Judged for Pixel Paranoia, a UI &
-                      Design-centric hackathon hosted by Dwarkadas J. Sanghvi
-                      College of Engineering, guiding over 50+ participants
+                    {about.achievement3}
                     </p>
                   </li>
                 </ul>
@@ -991,7 +539,6 @@ const Portfolio = () => {
                 ))}
               </ul>
 
-              {/* Key Screens and Features */}
               {/* Key Screens and Features */}
               <h4 className="text-xl font-bold text-gray-900 mb-4">
                 Key Screens and Features
