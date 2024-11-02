@@ -13,7 +13,7 @@ import {
 import { experiences } from "./components/Experience";
 import { projects } from "./components/Project";
 import { skills } from "./components/Skills";
-import { about, hero } from "./components/About";
+import { about, contact, hero, inspiringQuote, sectionTitle } from "./components/About";
 
 const Portfolio = () => {
   const [activeProject, setActiveProject] = useState(null);
@@ -173,10 +173,10 @@ const Portfolio = () => {
             </div>
           </div>
           <p className="text-xl font-bold text-gray-600 mt-8 max-w-lg mx-auto">
-          {hero.tagline}
+            {hero.tagline}
           </p>
           <p className="text-xl text-gray-600 mt-8 max-w-lg mx-auto">
-          {hero.content}
+            {hero.content}
           </p>
           <div className="flex justify-center space-x-6 mt-6">
             <a
@@ -197,39 +197,91 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* Portfolio Section */}
+      <section
+        id="work"
+        className="min-h-screen flex flex-col justify-center py-20 bg-white-50 px-6"
+      >
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="section-title text-gray-900 mb-12">
+            {sectionTitle.portfolio}
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8 ">
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className="group bg-white-50 shadow-md rounded-xl overflow-hidden cursor-pointer"
+                onClick={() => setActiveProject(project)}
+              >
+                <div className="relative overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full transform group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {project.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="bg-gray-200 text-gray-700 px-3 py-1 text-sm rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section
         id="about"
         className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 px-6"
       >
         <div className="container mx-auto max-w-6xl">
-          <h2 className="section-title text-gray-900 mb-12">About Me</h2>
+          <h2 className="section-title text-gray-900 mb-12">
+          {sectionTitle.about}
+          </h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <p className="text-gray-600 mb-6">
-              {about.intro1}
-              </p>
-              <p className="text-gray-600 mb-6">
-              {about.intro2}
-              </p>
+              <p className="text-gray-600 mb-6">{about.intro1}</p>
+              <p className="text-gray-600 mb-6">{about.intro2}</p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="bg-white p-6 rounded-xl">
                   <Briefcase className="h-6 w-6 text-gray-900 mb-4" />
                   <h3 className="font-bold text-gray-900 mb-2">Experience</h3>
-                  <p className="text-gray-600 text-sm">
-                  {about.experience}
-                  </p>
+                  <p className="text-gray-600 text-sm">{about.experience}</p>
                 </div>
                 <div className="bg-white p-6 rounded-xl">
                   <Award className="h-6 w-6 text-gray-900 mb-4" />
                   <h3 className="font-bold text-gray-900 mb-2">Recognition</h3>
-                  <p className="text-gray-600 text-sm">
-                  {about.recognition}
-                  </p>
+                  <p className="text-gray-600 text-sm">{about.recognition}</p>
                 </div>
               </div>
             </div>
+
+            {/* Quote Section */}
             <div className="space-y-6">
+              <div className="bg-gray-100 p-6 rounded-xl">
+               <p className="text-gray-900 leading-relaxed">
+               {inspiringQuote.intro}
+                </p>
+                <blockquote className="italic text-gray-700 text-lg text-left">
+                  "{inspiringQuote.text}"
+                </blockquote>
+                <p className="text-right text-gray-600 mt-2">
+                  - {inspiringQuote.author}
+                </p>
+              </div>
+
               <div className="bg-white p-6 rounded-xl">
                 <h3 className="font-bold text-gray-900 mb-4">
                   Recent Achievements
@@ -238,19 +290,19 @@ const Portfolio = () => {
                   <li className="flex items-start">
                     <Target className="h-6 w-6 text-gray-900 mt-0.5 mr-4 flex-shrink-0" />
                     <p className="text-gray-600 leading-relaxed">
-                    {about.achievement1}
+                      {about.achievement1}
                     </p>
                   </li>
                   <li className="flex items-start">
                     <BookOpen className="h-6 w-6 text-gray-900 mt-0.5 mr-4 flex-shrink-0" />
                     <p className="text-gray-600 leading-relaxed">
-                    {about.achievement2}
+                      {about.achievement2}
                     </p>
                   </li>
                   <li className="flex items-start">
                     <Award className="h-6 w-6 text-gray-900 mt-0.5 mr-4 flex-shrink-0" />
                     <p className="text-gray-600 leading-relaxed">
-                    {about.achievement3}
+                      {about.achievement3}
                     </p>
                   </li>
                 </ul>
@@ -266,7 +318,9 @@ const Portfolio = () => {
         className="min-h-screen flex flex-col justify-center py-20 bg-white px-6"
       >
         <div className="container mx-auto max-w-6xl">
-          <h2 className="section-title text-gray-900 mb-12">Experience</h2>
+          <h2 className="section-title text-gray-900 mb-12">
+          {sectionTitle.experience}
+          </h2>
           <div className="space-y-8">
             {experiences.map((experience) => (
               <div key={experience.id} className="bg-gray-50 rounded-xl p-6">
@@ -633,57 +687,14 @@ const Portfolio = () => {
         </div>
       )}
 
-      {/* Portfolio Section */}
-      <section
-        id="work"
-        className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 px-6"
-      >
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="section-title text-gray-900 mb-12">Selected Work</h2>
-          <div className="grid md:grid-cols-2 gap-8 ">
-            {projects.map((project) => (
-              <div
-                key={project.id}
-                className="group bg-white-50 shadow-md rounded-xl overflow-hidden cursor-pointer"
-                onClick={() => setActiveProject(project)}
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full transform group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {project.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="bg-gray-200 text-gray-700 px-3 py-1 text-sm rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Skills Section */}
       <section
         id="skills"
-        className="min-h-screen flex flex-col justify-center py-20 bg-white-50 px-6"
+        className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 px-6"
       >
         <div className="container mx-auto max-w-6xl">
           <h2 className="section-title text-gray-900 mb-12">
-            Skills & Expertise
+          {sectionTitle.skills}
           </h2>
           <div className="grid md:grid-cols-4 gap-8">
             {skills.map((skillGroup, index) => (
@@ -711,13 +722,10 @@ const Portfolio = () => {
       >
         <div className="container mx-auto max-w-6xl">
           <div className="bg-gray-900 rounded-2xl p-12 text-center">
-            <h2 className="section-title text-white mb-4">
-              Let's Work Together
+            <h2 className="section-title text-white mb-4">{contact.intro1}</h2>
+            <h2 className="text-gray-400 mb-8 max-w-2xl mx-auto">
+              {contact.intro2}
             </h2>
-            <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-              Looking for a UI/UX developer who can bridge design and
-              development? Let's create something amazing together.
-            </p>
             <div className="flex justify-center space-x-6">
               <a
                 href="mailto:vorashivam24@gmail.com"
@@ -727,13 +735,20 @@ const Portfolio = () => {
                 Email Me
               </a>
               <a
-                href="/files/Resume.pdf" // Replace with your actual resume file path
+                href="/files/Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100"
               >
                 <Briefcase className="h-5 w-5 mr-2" />
                 View Resume
+              </a>
+              <a
+                href="https://www.linkedin.com/in/shivam-vora/"
+                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100"
+              >
+                <Linkedin className="h-5 w-5 mr-2" />
+                LinkedIn
               </a>
             </div>
           </div>
