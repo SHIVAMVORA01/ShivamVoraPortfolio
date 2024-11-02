@@ -127,7 +127,12 @@ export const projects = [
         ],
         retrospective:
           "Urja aims to make home energy monitoring accessible and actionable, enabling users to manage their energy consumption with a single tap. By offering comprehensive insights down to individual devices, Urja empowers users to adopt more efficient habits, saving an estimated 10% on annual power bills, with potential for higher savings among engaged users. Urja provides a timely solution for household energy conservation, addressing rising electricity costs and environmental concerns by promoting efficient, mindful energy usage.",
-      },
+          files: [
+            { src: "/images/ydl_certificate.png", type: "image" },
+            { src: "/files/ydl_mail.pdf", type: "pdf" },
+          ],
+      
+        },
     },
     {
       id: 2,
