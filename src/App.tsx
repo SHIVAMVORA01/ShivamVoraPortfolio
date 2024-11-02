@@ -13,7 +13,13 @@ import {
 import { experiences } from "./components/Experience";
 import { projects } from "./components/Project";
 import { skills } from "./components/Skills";
-import { about, contact, hero, inspiringQuote, sectionTitle } from "./components/About";
+import {
+  about,
+  contact,
+  hero,
+  inspiringQuote,
+  sectionTitle,
+} from "./components/About";
 
 const Portfolio = () => {
   const [activeProject, setActiveProject] = useState(null);
@@ -248,7 +254,7 @@ const Portfolio = () => {
       >
         <div className="container mx-auto max-w-6xl">
           <h2 className="section-title text-gray-900 mb-12">
-          {sectionTitle.about}
+            {sectionTitle.about}
           </h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
@@ -271,8 +277,8 @@ const Portfolio = () => {
             {/* Quote Section */}
             <div className="space-y-6">
               <div className="bg-gray-100 p-6 rounded-xl">
-               <p className="text-gray-900 leading-relaxed">
-               {inspiringQuote.intro}
+                <p className="text-gray-900 leading-relaxed">
+                  {inspiringQuote.intro}
                 </p>
                 <blockquote className="italic text-gray-700 text-lg text-left">
                   "{inspiringQuote.text}"
@@ -319,7 +325,7 @@ const Portfolio = () => {
       >
         <div className="container mx-auto max-w-6xl">
           <h2 className="section-title text-gray-900 mb-12">
-          {sectionTitle.experience}
+            {sectionTitle.experience}
           </h2>
           <div className="space-y-8">
             {experiences.map((experience) => (
@@ -442,8 +448,15 @@ const Portfolio = () => {
       )}
 
       {activeProject && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+          onClick={() => setActiveProject(null)}
+        >
+          <div
+            className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
+            onClick={(e) => e.stopPropagation()} 
+          >
+            {" "}
             <div className="p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
@@ -694,7 +707,7 @@ const Portfolio = () => {
       >
         <div className="container mx-auto max-w-6xl">
           <h2 className="section-title text-gray-900 mb-12">
-          {sectionTitle.skills}
+            {sectionTitle.skills}
           </h2>
           <div className="grid md:grid-cols-4 gap-8">
             {skills.map((skillGroup, index) => (
@@ -726,29 +739,29 @@ const Portfolio = () => {
             <h2 className="text-gray-400 mb-8 max-w-2xl mx-auto">
               {contact.intro2}
             </h2>
-            <div className="flex justify-center space-x-6">
+            <div className="flex flex-col items-center space-y-4">
               <a
-                href="mailto:vorashivam24@gmail.com"
-                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100"
+                href="https://www.linkedin.com/in/shivam-vora/"
+                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100 w-[186px]"
               >
-                <Mail className="h-5 w-5 mr-2" />
-                Email Me
+                <Linkedin className="h-5 w-5 mr-2" />
+                LinkedIn
               </a>
               <a
                 href="/files/Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100"
+                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100 w-[186px]"
               >
                 <Briefcase className="h-5 w-5 mr-2" />
                 View Resume
               </a>
               <a
-                href="https://www.linkedin.com/in/shivam-vora/"
-                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100"
+                href="mailto:vorashivam24@gmail.com"
+                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100 w-[186px]"
               >
-                <Linkedin className="h-5 w-5 mr-2" />
-                LinkedIn
+                <Mail className="h-5 w-5 mr-2" />
+                Email Me
               </a>
             </div>
           </div>
