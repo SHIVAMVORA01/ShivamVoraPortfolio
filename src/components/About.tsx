@@ -1,13 +1,13 @@
-import { experiences } from "./Experience";
+import { Hero, About, InspiringQuote, Contact, SectionTitle } from '../types';
 
-export const hero = {
+export const hero: Hero = {
   intro: "Hello, I'm Shivam Vora",
   tagline: "Designer by Heart, Coder by Profession",
   content:
     "Creating intuitive digital experiences through thoughtful design and development. Currently working at Belden Inc as an R&D Software Developer.",
 };
 
-export const about = {
+export const about: About = {
   intro1:
     "I'm a UI/UX developer with a B.Tech in Information Technology from Dwarkadas J. Sanghvi College of Engineering (CGPA: 9.43/10) and currently working at Belden Inc. I started my journey as a web developer because of my passion to design and create innovative products. I have always enjoyed engaging both the creative and analytical parts of my brain. UX design is a perfect way for me to channel my creativity into innovative products. ",
   intro2:
@@ -22,20 +22,20 @@ export const about = {
     "Mentored and Judged for Pixel Paranoia, a UI & Design-centric hackathon hosted by Dwarkadas J. Sanghvi College of Engineering, guiding over 50+ participants.",
 };
 
-export const inspiringQuote = {
+export const inspiringQuote: InspiringQuote = {
   intro: "The quote that inspires my journey",
   text: "Design is not just what it looks like and feels like. Design is how it works.",
   author: "Steve Jobs",
 };
 
-export const contact = {
+export const contact: Contact = {
   intro1: "Where human behavior informs impactful experiences, I am there.",
   intro2: "Find your way to me here",
 };
 
-export const sectionTitle = {
+export const sectionTitle: SectionTitle = {
   portfolio: "What milestone projects tell my story?",
   about: "Meet the Designer with a Coder's Mindset",
-  experience:"My Professional Odyssey",
+  experience: "My Professional Odyssey",
   skills: "What I Bring to the Table",
 };

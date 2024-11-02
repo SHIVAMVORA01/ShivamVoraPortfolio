@@ -82,6 +82,14 @@ const Portfolio = () => {
     setActiveFile(null);
   };
 
+  const getNextProject = (currentProjectId: number) => {
+    const currentIndex = projects.findIndex(
+      (project) => project.id === currentProjectId
+    );
+    const nextIndex = (currentIndex + 1) % projects.length;
+    return projects[nextIndex];
+  };
+
   return (
     <div className="bg-white overflow-x-hidden overflow-y-auto min-h-screen">
       <style>{`
@@ -454,13 +462,16 @@ const Portfolio = () => {
         >
           <div
             className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
-            onClick={(e) => e.stopPropagation()} 
+            onClick={(e) => e.stopPropagation()}
           >
             {" "}
             <div className="p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  <h3
+                    className="text-2xl font-bold text-gray-900 mb-2"
+                    id={`project-title-${activeProject.id}`} // Add ID to the title
+                  >
                     {activeProject.title}
                   </h3>
                   <p className="text-gray-600">{activeProject.description}</p>
@@ -673,12 +684,11 @@ const Portfolio = () => {
                     )
                   )}
               </p>
-
               {/* Files and Attachments in Retrospective */}
               {activeProject.details.files && (
                 <div>
                   <p className="text-gray-600 mb-4 font-bold">
-                    Files & Attachments
+                    Awards & Certificates
                   </p>
                   <div className="flex space-x-2 mt-2">
                     {activeProject.details.files.map((file, index) => (
@@ -695,6 +705,75 @@ const Portfolio = () => {
                   </div>
                 </div>
               )}
+              {/* Scroll to top button before the next project section */}
+              <div className="flex justify-end mt-12 mb-8">
+                <button
+                  onClick={() => {
+                    const titleElement = document.getElementById(
+                      `project-title-${activeProject.id}`
+                    );
+                    if (titleElement) {
+                      titleElement.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className="bg-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-gray-800 transition-all duration-300"
+                  aria-label="Scroll to top"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 10l7-7m0 0l7 7m-7-7v18"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Next project navigation */}
+              <div className="pt-8 border-t border-gray-200">
+                <div className="flex justify-between items-center">
+                  <h4 className="text-xl font-bold text-gray-900">
+                    Next Project
+                  </h4>
+                  <button
+                    onClick={() => {
+                      const nextProject = getNextProject(activeProject.id);
+                      setActiveProject(nextProject);
+                      // Wait for next project to render, then scroll to its title
+                      setTimeout(() => {
+                        const titleElement = document.getElementById(
+                          `project-title-${nextProject.id}`
+                        );
+                        if (titleElement) {
+                          titleElement.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }, 100);
+                    }}
+                    className="group flex items-center space-x-2 text-gray-600 hover:text-gray-900"
+                  >
+                    <span>{getNextProject(activeProject.id).title}</span>
+                    <svg
+                      className="w-6 h-6 transform group-hover:translate-x-1 transition-transform duration-200"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

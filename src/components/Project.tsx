@@ -1,5 +1,7 @@
-export const projects = [
-    {
+import { Project } from '../types';
+
+export const projects: Project[] = [
+  {
       id: 1,
       title:
         "Urja: The Pocket Energy-saving App (Young Designer's League Finalists 2022)",
