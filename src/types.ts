@@ -1,5 +1,3 @@
-// types.ts
-
 // Hero Section Types
 export interface Hero {
     intro: string;

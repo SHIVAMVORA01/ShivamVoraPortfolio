@@ -24,8 +24,8 @@ export const about: About = {
 
 export const inspiringQuote: InspiringQuote = {
   intro: "The quote that inspires my journey",
-  text: "Design is not just what it looks like and feels like. Design is how it works.",
-  author: "Steve Jobs",
+  text: "If you only do what you can do, you will never be more than you are now.",
+  author: "Master Shifu (Kung Fu Panda)",
 };
 
 export const contact: Contact = {

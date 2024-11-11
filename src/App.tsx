@@ -180,9 +180,9 @@ const Portfolio = () => {
           <div className="flex items-center justify-center mt-6">
             <div className="relative">
               <img
-                src="/images/Shivam Vora.png"
+                src="/images/Shivam.png"
                 alt="Shivam Vora"
-                className="rounded-xl w-48 h-48 md:w-64 md:h-64 object-cover shadow-lg"
+                className="w-full h-auto max-w-[256px] max-h-[256px] md:max-w-[320px] md:max-h-[320px] object-contain rounded-lg"
               />
             </div>
           </div>
