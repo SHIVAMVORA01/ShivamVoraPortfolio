@@ -81,6 +81,7 @@ export interface Hero {
     tools: string;
     contributions: string[];
     problemStatement: string;
+    problemStatementImages?: string[]; // Add this new field
     solutionOverview: string;
     researchInsights: ResearchInsight[];
     objectives: string[];

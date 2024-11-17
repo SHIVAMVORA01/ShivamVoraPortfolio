@@ -427,7 +427,7 @@ const Portfolio = () => {
               {activeProject ? (
                 <div>
                   <h4 className="text-xl font-bold text-gray-900 mb-4">
-                    Project Overview
+                    Brief
                   </h4>
                   <p className="text-gray-600 mb-4">
                     {activeProject.description}
@@ -498,7 +498,7 @@ const Portfolio = () => {
 
               {/* Detailed Sections */}
               <h4 className="text-xl font-bold text-gray-1900 mb-4">
-                Project Overview
+                Brief
               </h4>
               <p className="text-gray-600 mb-4">
                 {activeProject.details.overview}
@@ -518,15 +518,27 @@ const Portfolio = () => {
 
               {/* Problem Statement */}
               <h4 className="text-xl font-bold text-gray-1900 mb-4">
-                Problem Statement
+                Understanding the Problem
               </h4>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-600 mb-4">
                 {activeProject.details.problemStatement}
               </p>
+              {activeProject.details.problemStatementImages && (
+                <div className="space-y-4 mb-8">
+                  {activeProject.details.problemStatementImages.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`Problem statement illustration ${index + 1}`}
+                      className="w-full h-auto rounded-lg shadow-md"
+                    />
+                  ))}
+                </div>
+              )}
 
               {/* Solution Overview */}
               <h4 className="text-xl font-bold text-gray-1900 mb-4">
-                Solution Overview
+              How are we solving it? — Let's go through the process
               </h4>
               <p className="text-gray-600 mb-8">
                 {activeProject.details.solutionOverview}
@@ -534,7 +546,7 @@ const Portfolio = () => {
 
               {/* Research & Insights */}
               <h4 className="text-xl font-bold text-gray-1900 mb-4">
-                Research & Insights
+              Understanding consumer attitudes and needs
               </h4>
               <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-3">
                 {activeProject.details.researchInsights.map(
@@ -568,7 +580,7 @@ const Portfolio = () => {
 
               {/* Objectives */}
               <h4 className="text-xl font-bold text-gray-1900 mb-4">
-                Defining the Objectives
+              What We Aimed to Achieve
               </h4>
               <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-3">
                 {activeProject.details.objectives.map((objective, index) => (
@@ -578,7 +590,7 @@ const Portfolio = () => {
 
               {/* Design & Development Process */}
               <h4 className="text-xl font-bold text-gray-900 mb-4">
-                Design & Development Process
+              Crafting the Solution
               </h4>
               <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-6">
                 {" "}
@@ -619,7 +631,7 @@ const Portfolio = () => {
 
               {/* Key Screens and Features */}
               <h4 className="text-xl font-bold text-gray-900 mb-4">
-                Key Screens and Features
+              The User Experience
               </h4>
               <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-6">
                 {" "}
@@ -661,7 +673,7 @@ const Portfolio = () => {
 
               {/* Retrospective */}
               <h4 className="text-xl font-bold text-gray-900 mb-4">
-                Retrospective
+              Impact and Beyond
               </h4>
               <p className="text-gray-600 mb-4">
                 {activeProject.details.retrospective
