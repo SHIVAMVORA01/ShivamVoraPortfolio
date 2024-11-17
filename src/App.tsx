@@ -140,36 +140,48 @@ const Portfolio = () => {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200 py-4">
-            <a
-              href="#about"
-              className="block text-gray-600 px-6 py-2"
+          <>
+            {/* Blurred backdrop */}
+            <div 
+              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
               onClick={toggleMenu}
-            >
-              About
-            </a>
-            <a
-              href="#work"
-              className="block text-gray-600 px-6 py-2"
-              onClick={toggleMenu}
-            >
-              Work
-            </a>
-            <a
-              href="#skills"
-              className="block text-gray-600 px-6 py-2"
-              onClick={toggleMenu}
-            >
-              Skills
-            </a>
-            <a
-              href="#contact"
-              className="block text-gray-600 px-6 py-2"
-              onClick={toggleMenu}
-            >
-              Get in Touch
-            </a>
-          </div>
+            />
+            {/* Menu content */}
+            <div className="fixed inset-x-0 top-[73px] p-4 md:hidden z-50">
+              <div className="bg-white rounded-lg shadow-lg ring-1 ring-black/5">
+                <div className="flex flex-col divide-y divide-gray-200">
+                  <a
+                    href="#about"
+                    className="px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    onClick={toggleMenu}
+                  >
+                    About
+                  </a>
+                  <a
+                    href="#work"
+                    className="px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    onClick={toggleMenu}
+                  >
+                    Work
+                  </a>
+                  <a
+                    href="#skills"
+                    className="px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    onClick={toggleMenu}
+                  >
+                    Skills
+                  </a>
+                  <a
+                    href="#contact"
+                    className="px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    onClick={toggleMenu}
+                  >
+                    Get in Touch
+                  </a>
+                </div>
+              </div>
+            </div>
+          </>
         )}
       </nav>
 
