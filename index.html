@@ -5,6 +5,15 @@
     <link rel="icon" type="image/x-icon" href="/files/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shivam Vora</title>
+    <script>
+      // Check for dark mode preference
+      if (localStorage.getItem('darkMode') === 'true' || 
+          (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -8,6 +8,8 @@ import {
   Target,
   Menu,
   ArrowUp,
+  Moon,
+  Sun,
 } from "lucide-react";
 
 import { experiences } from "./components/Experience";
@@ -21,14 +23,88 @@ import {
   sectionTitle,
 } from "./components/About";
 
-const Portfolio = () => {
-  const [activeProject, setActiveProject] = useState(null);
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  details: {
+    overview: string;
+    timeline: string;
+    tools: string;
+    contributions: string[];
+    problemStatement: string;
+    problemStatementImages?: string[];
+    solutionOverview: string;
+    researchInsights: Array<{
+      title: string;
+      content: string;
+      subPoints?: string[];
+      image?: string;
+    }>;
+    objectives: string[];
+    designProcess: Array<{
+      title: string;
+      content: string;
+      subPoints?: string[];
+      image?: string;
+    }>;
+    keyFeatures: Array<{
+      title: string;
+      content: string;
+      subPoints?: string[];
+      image?: string;
+    }>;
+    retrospective: string;
+    files?: Array<{
+      type: string;
+      src: string;
+    }>;
+  };
+}
+
+interface FileType {
+  type: string;
+  src: string;
+}
+
+export default function Portfolio() {
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeFile, setActiveFile] = useState(null);
+  const [activeFile, setActiveFile] = useState<FileType | null>(null);
+  const [showTopButton, setShowTopButton] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Handle dark mode toggle
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
+  // Sync dark mode with localStorage and document
+  useEffect(() => {
+    const sections = [
+      document.querySelector(".hero-section"),
+      document.querySelector("nav"),
+      document.querySelector("#contact"),
+    ];
+
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
+      // Reset background colors for dark mode
+      sections.forEach((section) => {
+        if (section) {
+          (section as HTMLElement).style.background = '';
+        }
+      });
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
+    }
+  }, [darkMode]);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
-  const [showTopButton, setShowTopButton] = useState(false);
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -59,13 +135,16 @@ const Portfolio = () => {
     const colors = ["#FFFAE3", "#E3F9FF", "#F0EFFF", "#E8FDF5", "#FFF5F3"];
 
     const changeColor = () => {
-      sections.forEach((section) => {
-        if (section) {
-          section.style.transition = "background 2s ease-out";
-          section.style.background = colors[colorIndex];
-        }
-      });
-      colorIndex = (colorIndex + 1) % colors.length;
+      // Only change colors if not in dark mode
+      if (!document.documentElement.classList.contains('dark')) {
+        sections.forEach((section) => {
+          if (section) {
+            (section as HTMLElement).style.transition = "background 2s ease-out";
+            (section as HTMLElement).style.background = colors[colorIndex];
+          }
+        });
+        colorIndex = (colorIndex + 1) % colors.length;
+      }
     };
 
     const intervalId = setInterval(changeColor, 6000);
@@ -73,7 +152,7 @@ const Portfolio = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const openFileModal = (file) => {
+  const handleFileOpen = (file: FileType) => {
     setActiveFile(file);
   };
 
@@ -91,7 +170,7 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="bg-white overflow-x-hidden overflow-y-auto min-h-screen">
+    <div className="bg-white dark:bg-gray-900 overflow-x-hidden overflow-y-auto min-h-screen">
       <style>{`
         @import url('https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise');
         .hero-title {
@@ -114,66 +193,73 @@ const Portfolio = () => {
       `}</style>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-100 z-50">
+      <nav className="fixed top-0 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center">
-            <div className="nav-brand text-gray-1000 hidden md:block">SV</div>
+            <div className="nav-brand text-gray-1000 dark:text-white hidden md:block">SV</div>
             <button className="ml-auto md:hidden" onClick={toggleMenu}>
-              <Menu className="h-6 w-6 text-gray-800" />
+              <Menu className="h-6 w-6 text-gray-800 dark:text-white" />
             </button>
           </div>
-          <div className={`space-x-8 hidden md:flex`}>
-            <a href="#about" className="text-gray-600 hover:text-gray-900">
-              About
-            </a>
-            <a href="#work" className="text-gray-600 hover:text-gray-900">
-              Work
-            </a>
-            <a href="#skills" className="text-gray-600 hover:text-gray-900">
-              Skills
-            </a>
-            <a href="#contact" className="text-gray-600 hover:text-gray-900">
-              Get in Touch
-            </a>
+          
+          {/* Add dark mode toggle button */}
+          <div className="flex items-center space-x-8">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white"
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </button>
+            <div className="hidden md:flex space-x-8">
+              <a href="#about" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">About</a>
+              <a href="#work" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Work</a>
+              <a href="#skills" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Skills</a>
+              <a href="#contact" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Get in Touch</a>
+            </div>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu with dark mode support */}
         {menuOpen && (
           <>
             {/* Blurred backdrop */}
             <div 
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm z-40 md:hidden"
               onClick={toggleMenu}
             />
             {/* Menu content */}
             <div className="fixed inset-x-0 top-[73px] p-4 md:hidden z-50">
-              <div className="bg-white rounded-lg shadow-lg ring-1 ring-black/5">
-                <div className="flex flex-col divide-y divide-gray-200">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg ring-1 ring-black/5 dark:ring-white/5">
+                <div className="flex flex-col divide-y divide-gray-200 dark:divide-gray-700">
                   <a
                     href="#about"
-                    className="px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    className="px-4 py-3 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
                     onClick={toggleMenu}
                   >
                     About
                   </a>
                   <a
                     href="#work"
-                    className="px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    className="px-4 py-3 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
                     onClick={toggleMenu}
                   >
                     Work
                   </a>
                   <a
                     href="#skills"
-                    className="px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    className="px-4 py-3 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
                     onClick={toggleMenu}
                   >
                     Skills
                   </a>
                   <a
                     href="#contact"
-                    className="px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    className="px-4 py-3 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
                     onClick={toggleMenu}
                   >
                     Get in Touch
@@ -186,9 +272,9 @@ const Portfolio = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="hero-section min-h-screen flex flex-col items-center justify-center bg-blue-50 px-6 pt-20">
+      <section className="hero-section min-h-screen flex flex-col items-center justify-center bg-blue-50 dark:bg-gray-800 px-6 pt-20">
         <div className="text-center">
-          <h1 className="hero-title text-gray-900">{hero.intro}</h1>
+          <h1 className="hero-title text-gray-900 dark:text-white">{hero.intro}</h1>
           <div className="flex items-center justify-center mt-6">
             <div className="relative">
               <img
@@ -198,10 +284,10 @@ const Portfolio = () => {
               />
             </div>
           </div>
-          <p className="text-xl font-bold text-gray-600 mt-8 max-w-lg mx-auto">
+          <p className="text-xl font-bold text-gray-600 dark:text-gray-300 mt-8 max-w-lg mx-auto">
             {hero.tagline}
           </p>
-          <p className="text-xl text-gray-600 mt-8 max-w-lg mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 mt-8 max-w-lg mx-auto">
             {hero.content}
           </p>
           <div className="flex justify-center space-x-6 mt-6">
@@ -209,13 +295,13 @@ const Portfolio = () => {
               href="https://www.linkedin.com/in/shivam-vora/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-900"
+              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
             >
               <Linkedin className="h-6 w-6" />
             </a>
             <a
               href="mailto:vorashivam24@gmail.com"
-              className="text-gray-600 hover:text-gray-900"
+              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
             >
               <Mail className="h-6 w-6" />
             </a>
@@ -226,36 +312,36 @@ const Portfolio = () => {
       {/* Portfolio Section */}
       <section
         id="work"
-        className="min-h-screen flex flex-col justify-center py-20 bg-white-50 px-6"
+        className="min-h-screen flex flex-col justify-center py-20 bg-white-50 dark:bg-gray-900 px-6"
       >
         <div className="container mx-auto max-w-6xl">
-          <h2 className="section-title text-gray-900 mb-12">
+          <h2 className="section-title text-gray-900 dark:text-white mb-12">
             {sectionTitle.portfolio}
           </h2>
           <div className="grid md:grid-cols-2 gap-8 ">
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="group bg-white-50 shadow-md rounded-xl overflow-hidden cursor-pointer"
+                className="group bg-white-50 dark:bg-gray-800 shadow-md rounded-xl overflow-hidden cursor-pointer"
                 onClick={() => setActiveProject(project)}
               >
                 <div className="relative overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full transform group-hover:scale-105 transition-transform duration-300"
+                    className="w-full transform group-hover:scale-105 transition-transform duration-300 dark:bg-white"
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 mb-4">{project.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
                   <div className="flex flex-wrap gap-2 mt-2">
                     {project.tags.map((tag, index) => (
                       <span
                         key={index}
-                        className="bg-gray-200 text-gray-700 px-3 py-1 text-sm rounded-full"
+                        className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 text-sm rounded-full"
                       >
                         {tag}
                       </span>
@@ -270,64 +356,64 @@ const Portfolio = () => {
 
       <section
         id="about"
-        className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 px-6"
+        className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 dark:bg-gray-800 px-6"
       >
         <div className="container mx-auto max-w-6xl">
-          <h2 className="section-title text-gray-900 mb-12">
+          <h2 className="section-title text-gray-900 dark:text-white mb-12">
             {sectionTitle.about}
           </h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <p className="text-gray-600 mb-6">{about.intro1}</p>
-              <p className="text-gray-600 mb-6">{about.intro2}</p>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">{about.intro1}</p>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">{about.intro2}</p>
               <div className="grid grid-cols-2 gap-6">
-                <div className="bg-white p-6 rounded-xl">
-                  <Briefcase className="h-6 w-6 text-gray-900 mb-4" />
-                  <h3 className="font-bold text-gray-900 mb-2">Experience</h3>
-                  <p className="text-gray-600 text-sm">{about.experience}</p>
+                <div className="bg-white dark:bg-gray-700 p-6 rounded-xl">
+                  <Briefcase className="h-6 w-6 text-gray-900 dark:text-white mb-4" />
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Experience</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">{about.experience}</p>
                 </div>
-                <div className="bg-white p-6 rounded-xl">
-                  <Award className="h-6 w-6 text-gray-900 mb-4" />
-                  <h3 className="font-bold text-gray-900 mb-2">Recognition</h3>
-                  <p className="text-gray-600 text-sm">{about.recognition}</p>
+                <div className="bg-white dark:bg-gray-700 p-6 rounded-xl">
+                  <Award className="h-6 w-6 text-gray-900 dark:text-white mb-4" />
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Recognition</h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">{about.recognition}</p>
                 </div>
               </div>
             </div>
 
             {/* Quote Section */}
             <div className="space-y-6">
-              <div className="bg-gray-100 p-6 rounded-xl">
-                <p className="text-gray-900 leading-relaxed">
+              <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded-xl">
+                <p className="text-gray-900 dark:text-white leading-relaxed">
                   {inspiringQuote.intro}
                 </p>
-                <blockquote className="italic text-gray-700 text-lg text-left">
+                <blockquote className="italic text-gray-700 dark:text-gray-300 text-lg text-left">
                   "{inspiringQuote.text}"
                 </blockquote>
-                <p className="text-right text-gray-600 mt-2">
+                <p className="text-right text-gray-600 dark:text-gray-300 mt-2">
                   - {inspiringQuote.author}
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-xl">
-                <h3 className="font-bold text-gray-900 mb-4">
+              <div className="bg-white dark:bg-gray-700 p-6 rounded-xl">
+                <h3 className="font-bold text-gray-900 dark:text-white mb-4">
                   Recent Achievements
                 </h3>
                 <ul className="space-y-4">
                   <li className="flex items-start">
-                    <Target className="h-6 w-6 text-gray-900 mt-0.5 mr-4 flex-shrink-0" />
-                    <p className="text-gray-600 leading-relaxed">
+                    <Target className="h-6 w-6 text-gray-900 dark:text-white mt-0.5 mr-4 flex-shrink-0" />
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                       {about.achievement1}
                     </p>
                   </li>
                   <li className="flex items-start">
-                    <BookOpen className="h-6 w-6 text-gray-900 mt-0.5 mr-4 flex-shrink-0" />
-                    <p className="text-gray-600 leading-relaxed">
+                    <BookOpen className="h-6 w-6 text-gray-900 dark:text-white mt-0.5 mr-4 flex-shrink-0" />
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                       {about.achievement2}
                     </p>
                   </li>
                   <li className="flex items-start">
-                    <Award className="h-6 w-6 text-gray-900 mt-0.5 mr-4 flex-shrink-0" />
-                    <p className="text-gray-600 leading-relaxed">
+                    <Award className="h-6 w-6 text-gray-900 dark:text-white mt-0.5 mr-4 flex-shrink-0" />
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                       {about.achievement3}
                     </p>
                   </li>
@@ -341,22 +427,22 @@ const Portfolio = () => {
       {/* Experience Section */}
       <section
         id="experience"
-        className="min-h-screen flex flex-col justify-center py-20 bg-white px-6"
+        className="min-h-screen flex flex-col justify-center py-20 bg-white dark:bg-gray-900 px-6"
       >
         <div className="container mx-auto max-w-6xl">
-          <h2 className="section-title text-gray-900 mb-12">
+          <h2 className="section-title text-gray-900 dark:text-white mb-12">
             {sectionTitle.experience}
           </h2>
           <div className="space-y-8">
             {experiences.map((experience) => (
-              <div key={experience.id} className="bg-gray-50 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+              <div key={experience.id} className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   {experience.title}
                 </h3>
-                <p className="text-gray-600 mb-4">{experience.period}</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">{experience.period}</p>
 
                 {/* Render each statement in description */}
-                <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-3">
+                <ul className="text-gray-600 dark:text-gray-300 list-disc mb-8 pl-5 space-y-3">
                   {experience.description.map((statement, index) => (
                     <li key={index} className="ml-4">
                       {statement}
@@ -367,7 +453,7 @@ const Portfolio = () => {
                 {/* Attached Files */}
                 <div>
                   {" "}
-                  <p className="text-gray-600 mb-4 font-bold">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 font-bold">
                     Files, Awards & Certificates
                   </p>
                 </div>
@@ -377,8 +463,8 @@ const Portfolio = () => {
                       key={index}
                       src={file.type === "image" ? file.src : "/images/pdf.png"}
                       alt="File Preview"
-                      className="w-12 h-16 shadow-md cursor-pointer"
-                      onClick={() => openFileModal(file)}
+                      className="w-12 h-16 shadow-md cursor-pointer dark:bg-white"
+                      onClick={() => handleFileOpen(file)}
                     />
                   ))}
                 </div>
@@ -391,25 +477,25 @@ const Portfolio = () => {
       {/* Reusable Modal Component */}
       {(activeProject || activeFile) && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
                   {activeProject ? (
                     <>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
                         {activeProject.title}
                       </h3>
-                      <p className="text-gray-600">
+                      <p className="text-gray-600 dark:text-gray-300">
                         {activeProject.description}
                       </p>
                     </>
                   ) : activeFile ? (
                     <>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
                         File Preview
                       </h3>
-                      <p className="text-gray-600">
+                      <p className="text-gray-600 dark:text-gray-300">
                         {activeFile.src.split("/").pop()}
                       </p>
                     </>
@@ -417,7 +503,7 @@ const Portfolio = () => {
                 </div>
                 <button
                   onClick={closeModal}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                 >
                   <svg
                     className="w-6 h-6"
@@ -438,10 +524,10 @@ const Portfolio = () => {
               {/* Content Display for Project or File */}
               {activeProject ? (
                 <div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-4">
+                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                     Brief
                   </h4>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
                     {activeProject.description}
                   </p>
                 </div>
@@ -451,7 +537,7 @@ const Portfolio = () => {
                     <img
                       src={activeFile.src}
                       alt="File Preview"
-                      className="w-full h-auto rounded-md"
+                      className="w-full h-auto rounded-md dark:bg-white"
                     />
                   ) : (
                     <iframe
@@ -473,7 +559,7 @@ const Portfolio = () => {
           onClick={() => setActiveProject(null)}
         >
           <div
-            className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
+            className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
             onClick={(e) => e.stopPropagation()}
           >
             {" "}
@@ -481,16 +567,16 @@ const Portfolio = () => {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3
-                    className="text-2xl font-bold text-gray-900 mb-2"
+                    className="text-2xl font-bold text-gray-900 dark:text-white mb-2"
                     id={`project-title-${activeProject.id}`} // Add ID to the title
                   >
                     {activeProject.title}
                   </h3>
-                  <p className="text-gray-600">{activeProject.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300">{activeProject.description}</p>
                 </div>
                 <button
                   onClick={() => setActiveProject(null)}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                 >
                   <svg
                     className="w-6 h-6"
@@ -509,13 +595,13 @@ const Portfolio = () => {
               </div>
 
               {/* Detailed Sections */}
-              <h4 className="text-xl font-bold text-gray-1900 mb-4">
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                 Brief
               </h4>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
                 {activeProject.details.overview}
               </p>
-              <div className="text-gray-600 mb-8">
+              <div className="text-gray-600 dark:text-gray-300 mb-8">
                 <p>
                   <strong>Timeline:</strong> {activeProject.details.timeline}
                 </p>
@@ -529,10 +615,10 @@ const Portfolio = () => {
               </div>
 
               {/* Problem Statement */}
-              <h4 className="text-xl font-bold text-gray-1900 mb-4">
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                 Understanding the Problem
               </h4>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
                 {activeProject.details.problemStatement}
               </p>
               {activeProject.details.problemStatementImages && (
@@ -542,25 +628,25 @@ const Portfolio = () => {
                       key={index}
                       src={image}
                       alt={`Problem statement illustration ${index + 1}`}
-                      className="w-full h-auto rounded-lg shadow-md"
+                      className="w-full h-auto rounded-lg shadow-md dark:bg-white"
                     />
                   ))}
                 </div>
               )}
 
               {/* Solution Overview */}
-              <h4 className="text-xl font-bold text-gray-1900 mb-4">
-              How are we solving it? — Let's go through the process
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                How are we solving it? — Let's go through the process
               </h4>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-600 dark:text-gray-300 mb-8">
                 {activeProject.details.solutionOverview}
               </p>
 
               {/* Research & Insights */}
-              <h4 className="text-xl font-bold text-gray-1900 mb-4">
-              Understanding consumer attitudes and needs
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                Understanding consumer attitudes and needs
               </h4>
-              <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-3">
+              <ul className="text-gray-600 dark:text-gray-300 list-disc mb-8 pl-5 space-y-3">
                 {activeProject.details.researchInsights.map(
                   (insight, index) => (
                     <li key={index} className="space-y-2">
@@ -569,7 +655,7 @@ const Portfolio = () => {
                       <div>{insight.content}</div> {/* Content */}
                       {/* Render subPoints as bullet points if they exist */}
                       {insight.subPoints && insight.subPoints.length > 0 && (
-                        <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-3">
+                        <ul className="text-gray-600 dark:text-gray-300 list-disc mb-8 pl-5 space-y-3">
                           {insight.subPoints.map((point, i) => (
                             <li key={i}>{point}</li>
                           ))}
@@ -581,7 +667,7 @@ const Portfolio = () => {
                           <img
                             src={insight.image}
                             alt={`${insight.title} image`}
-                            className="w-full h-auto"
+                            className="w-full h-auto dark:bg-white"
                           />
                         </div>
                       )}
@@ -591,20 +677,20 @@ const Portfolio = () => {
               </ul>
 
               {/* Objectives */}
-              <h4 className="text-xl font-bold text-gray-1900 mb-4">
-              What We Aimed to Achieve
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                What We Aimed to Achieve
               </h4>
-              <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-3">
+              <ul className="text-gray-600 dark:text-gray-300 list-disc mb-8 pl-5 space-y-3">
                 {activeProject.details.objectives.map((objective, index) => (
                   <li key={index}>{objective}</li>
                 ))}
               </ul>
 
               {/* Design & Development Process */}
-              <h4 className="text-xl font-bold text-gray-900 mb-4">
-              Crafting the Solution
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                Crafting the Solution
               </h4>
-              <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-6">
+              <ul className="text-gray-600 dark:text-gray-300 list-disc mb-8 pl-5 space-y-6">
                 {" "}
                 {/* Increased space-y for better separation */}
                 {activeProject.details.designProcess.map((step, index) => (
@@ -631,7 +717,7 @@ const Portfolio = () => {
                           <img
                             src={step.image}
                             alt={`${step.title} image`}
-                            className="w-full h-auto mt-8"
+                            className="w-full h-auto mt-8 dark:bg-white"
                           />{" "}
                           {/* Added mt-2 for extra padding below content */}
                         </div>
@@ -642,10 +728,10 @@ const Portfolio = () => {
               </ul>
 
               {/* Key Screens and Features */}
-              <h4 className="text-xl font-bold text-gray-900 mb-4">
-              The User Experience
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                The User Experience
               </h4>
-              <ul className="text-gray-600 list-disc mb-8 pl-5 space-y-6">
+              <ul className="text-gray-600 dark:text-gray-300 list-disc mb-8 pl-5 space-y-6">
                 {" "}
                 {/* Increased space-y for better separation between features */}
                 {activeProject.details.keyFeatures.map((feature, index) => (
@@ -673,7 +759,7 @@ const Portfolio = () => {
                           <img
                             src={feature.image}
                             alt={`${feature.title} image`}
-                            className="w-full h-auto mt-2"
+                            className="w-full h-auto mt-2 dark:bg-white"
                           />{" "}
                           {/* Added mt-2 for extra padding below content */}
                         </div>
@@ -684,10 +770,10 @@ const Portfolio = () => {
               </ul>
 
               {/* Retrospective */}
-              <h4 className="text-xl font-bold text-gray-900 mb-4">
-              Impact and Beyond
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                Impact and Beyond
               </h4>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
                 {activeProject.details.retrospective
                   .split(" ")
                   .map((word, index) =>
@@ -711,7 +797,7 @@ const Portfolio = () => {
               {/* Files and Attachments in Retrospective */}
               {activeProject.details.files && (
                 <div>
-                  <p className="text-gray-600 mb-4 font-bold">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 font-bold">
                     Awards & Certificates
                   </p>
                   <div className="flex space-x-2 mt-2">
@@ -722,7 +808,7 @@ const Portfolio = () => {
                           file.type === "image" ? file.src : "/images/pdf.png"
                         } // Show PDF icon if it's a PDF file
                         alt="File Preview"
-                        className="w-12 h-16 shadow-md cursor-pointer"
+                        className="w-12 h-16 shadow-md cursor-pointer dark:bg-white"
                         onClick={() => window.open(file.src, "_blank")} // Opens file in a new window
                       />
                     ))}
@@ -760,9 +846,9 @@ const Portfolio = () => {
               </div>
 
               {/* Next project navigation */}
-              <div className="pt-8 border-t border-gray-200">
+              <div className="pt-8 border-t border-gray-200 dark:border-gray-700">
                 <div className="flex justify-between items-center">
-                  <h4 className="text-xl font-bold text-gray-900">
+                  <h4 className="text-xl font-bold text-gray-900 dark:text-white">
                     Next Project
                   </h4>
                   <button
@@ -779,7 +865,7 @@ const Portfolio = () => {
                         }
                       }, 100);
                     }}
-                    className="group flex items-center space-x-2 text-gray-600 hover:text-gray-900"
+                    className="group flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                   >
                     <span>{getNextProject(activeProject.id).title}</span>
                     <svg
@@ -791,8 +877,8 @@ const Portfolio = () => {
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        strokeWidth={2}
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
                       />
                     </svg>
                   </button>
@@ -802,25 +888,23 @@ const Portfolio = () => {
           </div>
         </div>
       )}
-
-      {/* Skills Section */}
       <section
         id="skills"
-        className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 px-6"
+        className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 dark:bg-gray-800 px-6"
       >
         <div className="container mx-auto max-w-6xl">
-          <h2 className="section-title text-gray-900 mb-12">
+          <h2 className="section-title text-gray-900 dark:text-white mb-12">
             {sectionTitle.skills}
           </h2>
           <div className="grid md:grid-cols-4 gap-8">
             {skills.map((skillGroup, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-md">
-                <h3 className="font-bold text-gray-900 mb-4">
+              <div key={index} className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+                <h3 className="font-bold text-gray-900 dark:text-white mb-4">
                   {skillGroup.category}
                 </h3>
                 <ul className="space-y-2">
                   {skillGroup.items.map((skill, skillIndex) => (
-                    <li key={skillIndex} className="text-gray-600">
+                    <li key={skillIndex} className="text-gray-600 dark:text-gray-300">
                       {skill}
                     </li>
                   ))}
@@ -837,7 +921,7 @@ const Portfolio = () => {
         className="min-h-screen flex flex-col justify-center py-20 px-6"
       >
         <div className="container mx-auto max-w-6xl">
-          <div className="bg-gray-900 rounded-2xl p-12 text-center">
+          <div className="bg-gray-900 dark:bg-[#1F2937] rounded-2xl p-12 text-center">
             <h2 className="section-title text-white mb-4">{contact.intro1}</h2>
             <h2 className="text-gray-400 mb-8 max-w-2xl mx-auto">
               {contact.intro2}
@@ -884,5 +968,3 @@ const Portfolio = () => {
     </div>
   );
 };
-
-export default Portfolio;
