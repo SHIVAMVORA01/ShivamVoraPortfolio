@@ -10,6 +10,7 @@ import {
   ArrowUp,
   Moon,
   Sun,
+  ArrowRight, 
 } from "lucide-react";
 
 import { experiences } from "./components/Experience";
@@ -332,21 +333,24 @@ export default function Portfolio() {
                     className="w-full transform group-hover:scale-105 transition-transform duration-300 dark:bg-white"
                   />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {project.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 text-sm rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                <div className="p-6 flex items-center justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {project.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 text-sm rounded-full"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
+                  <ArrowRight className="h-6 w-6 text-gray-900 dark:text-white" />
                 </div>
               </div>
             ))}

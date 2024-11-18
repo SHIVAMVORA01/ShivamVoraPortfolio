@@ -4,8 +4,8 @@ export const projects: Project[] = [
   {
     id: 1,
     title:
-      "Urja: The Pocket Energy-saving App (Young Designer's League Finalists 2022)",
-    description: "Transforming people's energy conservation habits.",
+      "Transforming people's energy conservation habits",
+    description: "Urja: The Pocket Energy-saving App",
     image: "/images/Urja.png",
     tags: ["Research", "UI Design", "Prototyping"],
     details: {
@@ -137,9 +137,9 @@ export const projects: Project[] = [
   },
   {
     id: 2,
-    title: "UTS App Redesign",
+    title: "Enhancing Ticketing Experience for Indian Railways",
     description:
-      "Enhancing Unreserved Ticketing Experience for Indian Railways.",
+      "UTS App Redesign",
     image: "/images/UTS.png",
     tags: ["UI Design", "Web Development", "Transport"],
     details: {
@@ -243,8 +243,8 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    title: "College Website Redesign",
-    description: "Complete redesign of DJSCE college website.",
+    title: "Revamping DJSCE's Online Presence",
+    description: "DJSCE college website redesign",
     image: "/images/DJSCE.png",
     tags: ["UI/UX", "Web Design", "Education"],
     details: {
@@ -318,8 +318,8 @@ export const projects: Project[] = [
 
   {
     id: 4,
-    title: " OLABS- Chemistry Virtual Lab Simulator",
-    description: "Building interactive virtual labs for remote education.",
+    title: "Building virtual labs for remote education",
+    description: "OLABS- Chemistry Virtual Lab Simulator",
     image: "/images/olabs_simulator.png",
     tags: ["UI/UX Design", "Web Development", "Education"],
     details: {
