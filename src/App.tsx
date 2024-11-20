@@ -6,7 +6,6 @@ import {
   Linkedin,
   Mail,
   Target,
-  ArrowUp,
   ArrowRight, 
 } from "lucide-react";
 
