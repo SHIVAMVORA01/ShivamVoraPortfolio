@@ -6,10 +6,7 @@ import {
   Linkedin,
   Mail,
   Target,
-  Menu,
   ArrowUp,
-  Moon,
-  Sun,
   ArrowRight, 
 } from "lucide-react";
 
@@ -23,6 +20,7 @@ import {
   inspiringQuote,
   sectionTitle,
 } from "./components/About";
+import { Dock } from "./components/Dock";
 
 interface Project {
   id: number;
@@ -72,7 +70,6 @@ interface FileType {
 
 export default function Portfolio() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [activeFile, setActiveFile] = useState<FileType | null>(null);
   const [showTopButton, setShowTopButton] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -105,7 +102,6 @@ export default function Portfolio() {
     }
   }, [darkMode]);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -193,87 +189,10 @@ export default function Portfolio() {
         }
       `}</style>
 
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 z-50">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <div className="nav-brand text-gray-1000 dark:text-white hidden md:block">SV</div>
-            <button className="ml-auto md:hidden" onClick={toggleMenu}>
-              <Menu className="h-6 w-6 text-gray-800 dark:text-white" />
-            </button>
-          </div>
-          
-          {/* Add dark mode toggle button */}
-          <div className="flex items-center space-x-8">
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white"
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </button>
-            <div className="hidden md:flex space-x-8">
-              <a href="#about" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">About</a>
-              <a href="#work" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Work</a>
-              <a href="#skills" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Skills</a>
-              <a href="#contact" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Get in Touch</a>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Menu with dark mode support */}
-        {menuOpen && (
-          <>
-            {/* Blurred backdrop */}
-            <div 
-              className="fixed inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm z-40 md:hidden"
-              onClick={toggleMenu}
-            />
-            {/* Menu content */}
-            <div className="fixed inset-x-0 top-[73px] p-4 md:hidden z-50">
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg ring-1 ring-black/5 dark:ring-white/5">
-                <div className="flex flex-col divide-y divide-gray-200 dark:divide-gray-700">
-                  <a
-                    href="#about"
-                    className="px-4 py-3 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
-                    onClick={toggleMenu}
-                  >
-                    About
-                  </a>
-                  <a
-                    href="#work"
-                    className="px-4 py-3 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
-                    onClick={toggleMenu}
-                  >
-                    Work
-                  </a>
-                  <a
-                    href="#skills"
-                    className="px-4 py-3 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
-                    onClick={toggleMenu}
-                  >
-                    Skills
-                  </a>
-                  <a
-                    href="#contact"
-                    className="px-4 py-3 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
-                    onClick={toggleMenu}
-                  >
-                    Get in Touch
-                  </a>
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-      </nav>
+      <Dock darkMode={darkMode} toggleDarkMode={toggleDarkMode} showTopButton={showTopButton} scrollToTop={scrollToTop} />
 
       {/* Hero Section */}
-      <section className="hero-section min-h-screen flex flex-col items-center justify-center bg-blue-50 dark:bg-gray-800 px-6 pt-20">
+      <section className="hero-section min-h-screen flex flex-col bg-blue-50 dark:bg-gray-800 px-6 pt-20">
         <div className="text-center">
           <h1 className="hero-title text-gray-900 dark:text-white">{hero.intro}</h1>
           <div className="flex items-center justify-center mt-6">
@@ -291,22 +210,6 @@ export default function Portfolio() {
           <p className="text-xl text-gray-600 dark:text-gray-300 mt-8 max-w-lg mx-auto">
             {hero.content}
           </p>
-          <div className="flex justify-center space-x-6 mt-6">
-            <a
-              href="https://www.linkedin.com/in/shivam-vora/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-            >
-              <Linkedin className="h-6 w-6" />
-            </a>
-            <a
-              href="mailto:vorashivam24@gmail.com"
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-            >
-              <Mail className="h-6 w-6" />
-            </a>
-          </div>
         </div>
       </section>
 
@@ -566,7 +469,6 @@ export default function Portfolio() {
             className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
             onClick={(e) => e.stopPropagation()}
           >
-            {" "}
             <div className="p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
@@ -877,7 +779,7 @@ export default function Portfolio() {
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                    >
+                    >recognition
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -958,17 +860,6 @@ export default function Portfolio() {
           </div>
         </div>
       </section>
-
-      {/* Back to Top Button */}
-      {showTopButton && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-6 right-6 bg-gray-900 text-white p-3 rounded-full shadow-md hover:bg-gray-800 transition duration-300"
-          aria-label="Scroll to top"
-        >
-          <ArrowUp className="h-6 w-6" />
-        </button>
-      )}
     </div>
   );
 };

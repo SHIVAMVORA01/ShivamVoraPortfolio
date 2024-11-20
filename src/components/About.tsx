@@ -4,7 +4,7 @@ export const hero: Hero = {
   intro: "Hello, I'm Shivam Vora",
   tagline: "Designer by Heart, Coder by Profession",
   content:
-    "Creating intuitive digital experiences through thoughtful design and development. Currently working at Belden Inc as an R&D Software Developer.",
+    "Currently working at Belden Inc as an R&D Software Developer.",
 };
 
 export const about: About = {
