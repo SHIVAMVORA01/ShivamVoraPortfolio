@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BookOpen,
   Award,
@@ -6,6 +6,8 @@ import {
   Linkedin,
   Mail,
   Target,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 import { experiences } from "./components/Experience";
@@ -20,7 +22,7 @@ import {
 import { Dock } from "./components/Dock";
 import ShimmerButton from "./components/ShimmerButton";
 
-interface Project {
+export interface Project {
   id: number;
   title: string;
   description: string;
@@ -72,6 +74,7 @@ export default function Portfolio() {
   const [showTopButton, setShowTopButton] = useState(false);
   const [darkMode, setDarkMode] = useState(true); // Changed to true for default dark mode
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const [activeExperience, setActiveExperience] = useState<number | null>(null);
 
   // Handle dark mode toggle
   const toggleDarkMode = () => {
@@ -140,6 +143,10 @@ export default function Portfolio() {
     );
     const nextIndex = (currentIndex + 1) % projects.length;
     return projects[nextIndex];
+  };
+
+  const toggleExperience = (id: number) => {
+    setActiveExperience(activeExperience === id ? null : id);
   };
 
   return (
@@ -404,46 +411,63 @@ export default function Portfolio() {
             {sectionTitle.experience}
           </h2>
           <div className="space-y-8">
-            {experiences.map((experience) => (
-              <div
-                key={experience.id}
-                className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6"
-              >
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                  {experience.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  {experience.period}
-                </p>
-
-                {/* Render each statement in description */}
-                <ul className="text-gray-600 dark:text-gray-300 list-disc mb-8 pl-5 space-y-3">
-                  {experience.description.map((statement, index) => (
-                    <li key={index} className="ml-4">
-                      {statement}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Attached Files */}
-                <div>
-                  {" "}
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 font-bold">
-                    Files, Awards & Certificates
-                  </p>
+            {experiences.map((experience: {
+              id: number;
+              title: string;
+              period: string;
+              description: string[];
+              files: Array<{ type: string; src: string; }>;
+            }) => (
+              <React.Fragment key={experience.id}>
+                <div
+                  className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 cursor-pointer flex justify-between items-center"
+                  onClick={() => toggleExperience(experience.id)}
+                >
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      {experience.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      {experience.period}
+                    </p>
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-300">
+                    {activeExperience === experience.id ? (
+                      <ChevronUp className="w-6 h-6" />
+                    ) : (
+                      <ChevronDown className="w-6 h-6" />
+                    )}
+                  </div>
                 </div>
-                <div className="flex space-x-2 mt-2">
-                  {experience.files.map((file, index) => (
-                    <img
-                      key={index}
-                      src={file.type === "image" ? file.src : "/images/pdf.png"}
-                      alt="File Preview"
-                      className="w-12 h-16 shadow-md cursor-pointer dark:bg-white"
-                      onClick={() => handleFileOpen(file)}
-                    />
-                  ))}
-                </div>
-              </div>
+                {activeExperience === experience.id && (
+                  <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 mt-2">
+                    <ul className="text-gray-600 dark:text-gray-300 list-disc mb-8 pl-5 space-y-3">
+                      {experience.description.map((statement: string, index: number) => (
+                        <li key={index} className="ml-4">
+                          {statement}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 font-bold">
+                        Files, Awards & Certificates
+                      </p>
+                    </div>
+                    <div className="flex space-x-2 mt-2">
+                      {experience.files.map((file: { type: string; src: string }, index: number) => (
+                        <img
+                          key={index}
+                          src={file.type === "image" ? file.src : "/images/pdf.png"}
+                          alt="File Preview"
+                          className="w-12 h-16 shadow-md cursor-pointer dark:bg-white"
+                          onClick={() => handleFileOpen(file)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
             ))}
           </div>
         </div>
