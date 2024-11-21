@@ -312,6 +312,8 @@ export default function Portfolio() {
           )}
         </div>
       </section>
+      
+      {/* About Section */}
       <section
         id="about"
         className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 dark:bg-gray-800 px-6"
@@ -325,7 +327,7 @@ export default function Portfolio() {
               <p className="text-gray-600 dark:text-gray-300 mb-6">
                 {about.intro1}
               </p>
-              <p className="text-gray-600 dark:text.gray-300 mb-6">
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
                 {about.intro2}
               </p>
               <div className="grid grid-cols-2 gap-6">
@@ -338,7 +340,7 @@ export default function Portfolio() {
                     {about.experience}
                   </p>
                 </div>
-                <div className="bg-white dark:bg.gray-700 p-6 rounded-xl">
+                <div className="bg-white dark:bg-gray-700 p-6 rounded-xl">
                   <Award className="h-6 w-6 text-gray-900 dark:text-white mb-4" />
                   <h3 className="font-bold text-gray-900 dark:text-white mb-2">
                     Recognition
