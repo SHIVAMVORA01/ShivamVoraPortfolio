@@ -178,7 +178,7 @@ export default function Portfolio() {
           {Array.from({ length: 144 }).map((_, i) => (
             <div
               key={i}
-              className="w-full h-full border border-gray-550 dark:border-gray-700"
+              className="w-full h-full border border-gray-550 dark:border-gray-800"
             />
           ))}
         </div>
@@ -199,10 +199,9 @@ export default function Portfolio() {
               <div className="absolute -inset-4 bg-[#F8F8FF] dark:bg-gray-900 blur-sm" />
               <div className="relative z-10 text-4xl md:text-7xl font-bold mb-8 leading-tight text-gray-900 dark:text-white">
                 I am{" "}
-                <span className="relative inline-block">
+                <span className="relative inline-block text-transparent bg-clip-text bg-[linear-gradient(108deg,_#0894FF,_#C959DD_34%,_#FF2E54_68%,_#FF9004)]">
                   Shivam Vora
-                  <span className="absolute inset-x-0 bottom-0 h-2 -z-10 transform skew-x-12 bg-[linear-gradient(108deg,_#0894FF,_#C959DD_34%,_#FF2E54_68%,_#FF9004)]" />
-                  </span>
+                </span>
               </div>
             </div>
 
@@ -312,7 +311,7 @@ export default function Portfolio() {
           )}
         </div>
       </section>
-      
+
       {/* About Section */}
       <section
         id="about"
@@ -908,7 +907,7 @@ export default function Portfolio() {
           {Array.from({ length: 144 }).map((_, i) => (
             <div
               key={i}
-              className="w-full h-full border border-gray-550 dark:border-gray-700"
+              className="w-full h-full border border-gray-550 dark:border-gray-800"
             />
           ))}
         </div>
