@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react"; // Add useState import
 import {
   RiUserLine,
   RiBriefcase2Line,
@@ -8,7 +8,7 @@ import {
   RiMoonLine,
   RiPhoneLine, 
 } from "react-icons/ri";
-import { ArrowUp } from "lucide-react"; // Import ArrowUp icon
+import { ArrowUp, ChevronUp, ChevronDown } from "lucide-react"; // Add ChevronUp and ChevronDown
 
 interface DockIconProps {
   icon?: React.ReactNode;
@@ -32,7 +32,7 @@ const DockIcon = ({ icon, label, href, onClick, isDivider, className }: DockIcon
 
   if (isDivider) {
     return (
-      <div className="h-8 md:h-px w-px md:w-8 bg-gray-300/50 dark:bg-white/50 mx-2 md:mx-0 md:my-2 self-center" />
+      <div className="h-8 w-px bg-gray-300/50 dark:bg-white/50 mx-2 self-center" />
     );
   }
 
@@ -70,7 +70,7 @@ const DockIcon = ({ icon, label, href, onClick, isDivider, className }: DockIcon
           {icon}
         </div>
       </motion.div>
-      <div className="absolute md:right-full md:mr-4 md:top-1/2 md:-translate-y-1/2 -top-12 scale-0 rounded-md bg-gray-800/90 dark:bg-gray-700/90 px-3 py-2 text-sm text-white opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200">
+      <div className="absolute -top-12 left-1/2 -translate-x-1/2 scale-0 rounded-md bg-gray-800/90 dark:bg-gray-700/90 px-3 py-2 text-sm text-white opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200">
         {label}
       </div>
     </BaseComponent>
@@ -85,67 +85,156 @@ interface DockProps {
 }
 
 export const Dock = ({ darkMode, toggleDarkMode, showTopButton, scrollToTop }: DockProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const dockAnimation = {
+    initial: { y: "100%", opacity: 0 },
+    animate: { 
+      y: isVisible ? "calc(100vh - 144px)" : "100%",
+      opacity: isVisible ? 1 : 0
+    },
+    transition: { 
+      type: "spring",
+      stiffness: 100,
+      damping: 20,
+      opacity: { duration: 0.2 }
+    }
+  };
+
+  const toggleAnimation = {
+    tap: { scale: 0.95 },
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 25
+    }
+  };
+
+  const contentAnimation = {
+    initial: { y: 20, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+    transition: { 
+      type: "spring",
+      stiffness: 300,
+      damping: 25,
+      delay: 0.1
+    }
+  };
+
   return (
-    <div className="fixed bottom-8 md:bottom-auto md:right-8 md:top-1/2 md:transform md:-translate-y-1/2 w-screen md:w-auto flex justify-center md:justify-start items-center z-50">
+    <>
+      {/* Dock with Toggle Button */}
       <motion.div
-        className="flex md:flex-col h-20 md:h-auto items-center gap-2 px-6 md:px-2 py-2 md:py-6 rounded-2xl 
-          bg-white dark:bg-gray-800 
-          shadow-[0_2px_10px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_10px_rgba(0,0,0,0.2)]
-          transition-all duration-300
-          relative"
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        className="fixed w-screen flex justify-center items-center z-40"
+        {...dockAnimation}
       >
-        {/* Animated gradient border */}
-        <div 
-          className="absolute -inset-[1.5px] rounded-2xl z-[-1]"
-          style={{
-            background: 'linear-gradient(108deg, #0894FF, #C959DD 34%, #FF2E54 68%, #FF9004)',
-            backgroundSize: '200% 200%',
-            animation: 'gradientMove 3s linear infinite'
-          }}
-        />
-        {/* Add keyframes for the animation */}
-        <style>{`
-          @keyframes gradientMove {
-            0% {
-              background-position: 0% 50%;
-            }
-            50% {
-              background-position: 100% 50%;
-            }
-            100% {
-              background-position: 0% 50%;
-            }
-          }
-        `}</style>
+        <div className="relative flex flex-col items-center">
+          <motion.div
+            className="flex flex-row h-20 items-center gap-2 px-4 py-2 rounded-2xl 
+              bg-white dark:bg-gray-800 
+              shadow-[0_2px_10px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_10px_rgba(0,0,0,0.2)]
+              transition-all duration-300
+              relative"
+            {...contentAnimation}
+          >
+            {/* Animated gradient border for dock */}
+            <div 
+              className="absolute -inset-[1.5px] rounded-2xl z-[-1]"
+              style={{
+                background: 'linear-gradient(108deg, #0894FF, #C959DD 34%, #FF2E54 68%, #FF9004)',
+                backgroundSize: '200% 200%',
+                animation: 'gradientMove 3s linear infinite'
+              }}
+            />
+            {/* Navigation Icons */}
+            <DockIcon icon={<RiUserLine />} label="About" href="#about" />
+            <DockIcon icon={<RiBriefcase2Line />} label="Work" href="#work" />
+            <DockIcon icon={<RiLightbulbLine />} label="Skills" href="#skills" />
+            <DockIcon icon={<RiPhoneLine />} label="Contact" href="#contact" />
+            
+            {/* Divider */}
+            <DockIcon isDivider />
+               
+            {/* Theme Toggle */}
+            <DockIcon 
+              icon={darkMode ? <RiSunLine /> : <RiMoonLine />}
+              label={darkMode ? "Light" : "Dark"}
+              onClick={toggleDarkMode}
+            />
 
-        {/* Navigation Icons */}
-        <DockIcon icon={<RiUserLine />} label="About" href="#about" />
-        <DockIcon icon={<RiBriefcase2Line />} label="Work" href="#work" />
-        <DockIcon icon={<RiLightbulbLine />} label="Skills" href="#skills" />
-        <DockIcon icon={<RiPhoneLine />} label="Contact" href="#contact" />
-        
-        {/* Divider */}
-        <DockIcon isDivider />
-           
-        {/* Theme Toggle */}
-        <DockIcon 
-          icon={darkMode ? <RiSunLine /> : <RiMoonLine />}
-          label={darkMode ? "Light" : "Dark"}
-          onClick={toggleDarkMode}
-        />
+            {/* Back to Top Button - Always visible when showTopButton is true */}
+            {showTopButton && (
+              <DockIcon 
+                icon={<ArrowUp />}
+                label="Top"
+                onClick={scrollToTop}
+              />
+            )}
+          </motion.div>
 
-        {/* Back to Top Button - Always visible when showTopButton is true */}
-        {showTopButton && (
-          <DockIcon 
-            icon={<ArrowUp />}
-            label="Top"
-            onClick={scrollToTop}
-          />
-        )}
+          {/* Toggle Button */}
+          <div className="absolute -bottom-12">
+            <div className="relative">
+              {/* Gradient Border */}
+              <div 
+                className={`absolute -inset-[1.5px] z-[-1] ${isVisible ? 'rounded-b-full' : 'rounded-full'}`}
+                style={{
+                  background: 'linear-gradient(108deg, #0894FF, #C959DD 34%, #FF2E54 68%, #FF9004)',
+                  backgroundSize: '200% 200%',
+                  animation: 'gradientMove 3s linear infinite'
+                }}
+              />
+              <motion.button
+                className={`bg-white dark:bg-gray-800 w-24 h-12 shadow-lg flex items-center justify-center ${isVisible ? 'rounded-b-full' : 'rounded-full'}`}
+                onClick={() => setIsVisible(!isVisible)}
+                whileTap={toggleAnimation.tap}
+                transition={toggleAnimation.transition}
+              >
+                <motion.div
+                  animate={{ rotate: isVisible ? 180 : 0 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                >
+                  <ChevronUp className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+                </motion.div>
+              </motion.button>
+            </div>
+          </div>
+        </div>
       </motion.div>
-    </div>
+
+      {/* Initial Toggle Button (only visible when dock is hidden) */}
+      {!isVisible && (
+        <motion.div
+          className="fixed bottom-8 w-full flex justify-center z-50"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 20, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        >
+          <div className="relative">
+            {/* Gradient Border */}
+            <div 
+              className={`absolute -inset-[1.5px] z-[-1] ${isVisible ? 'rounded-t-full' : 'rounded-full'}`}
+              style={{
+                background: 'linear-gradient(108deg, #0894FF, #C959DD 34%, #FF2E54 68%, #FF9004)',
+                backgroundSize: '200% 200%',
+                animation: 'gradientMove 3s linear infinite'
+              }}
+            />
+            <motion.button
+              className={`bg-white dark:bg-gray-800 w-24 h-12 shadow-lg flex items-center justify-center ${isVisible ? 'rounded-t-full' : 'rounded-full'}`}
+              onClick={() => setIsVisible(!isVisible)}
+              whileTap={{ scale: 0.95 }}
+            >
+              {isVisible ? (
+                <ChevronDown className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+              ) : (
+                <ChevronUp className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+              )}
+            </motion.button>
+          </div>
+        </motion.div>
+      )}
+    </>
   );
 };

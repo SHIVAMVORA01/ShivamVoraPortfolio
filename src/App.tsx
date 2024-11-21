@@ -172,7 +172,7 @@ export default function Portfolio() {
       />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center items-center bg-[#F8F8FF] dark:bg-gray-900 px-4">
+      <section className="relative min-h-[80vh] md:min-h-screen flex flex-col justify-center items-center bg-[#F8F8FF] dark:bg-gray-900 px-4 pt-16 md:pt-0">
         {/* Full Grid Background */}
         <div className="absolute inset-0 grid grid-cols-12 gap-4 p-4 pointer-events-none">
           {Array.from({ length: 144 }).map((_, i) => (
@@ -693,7 +693,7 @@ export default function Portfolio() {
                           <img
                             src={step.image}
                             alt={`${step.title} image`}
-                            className="w-full h-auto mt-8 dark:bg-white"
+                            className="w-full h-auto mt-8 dark:bg.white"
                           />{" "}
                           {/* Added mt-2 for extra padding below content */}
                         </div>
