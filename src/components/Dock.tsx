@@ -32,7 +32,7 @@ const DockIcon = ({ icon, label, href, onClick, isDivider, className }: DockIcon
 
   if (isDivider) {
     return (
-      <div className="h-8 md:h-px w-px md:w-8 bg-gray-300/50 dark:bg-gray-600/50 mx-2 md:mx-0 md:my-2 self-center" />
+      <div className="h-8 md:h-px w-px md:w-8 bg-gray-300/50 dark:bg-white/50 mx-2 md:mx-0 md:my-2 self-center" />
     );
   }
 
@@ -96,16 +96,31 @@ export const Dock = ({ darkMode, toggleDarkMode, showTopButton, scrollToTop }: D
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        style={{
-          position: 'relative',
-        }}
       >
-        {/* Add gradient border using pseudo-element */}
-        <div className="absolute -inset-[1.5px] rounded-2xl z-[-1]"
+        {/* Animated gradient border */}
+        <div 
+          className="absolute -inset-[1.5px] rounded-2xl z-[-1]"
           style={{
             background: 'linear-gradient(108deg, #0894FF, #C959DD 34%, #FF2E54 68%, #FF9004)',
+            backgroundSize: '200% 200%',
+            animation: 'gradientMove 3s linear infinite'
           }}
         />
+        {/* Add keyframes for the animation */}
+        <style>{`
+          @keyframes gradientMove {
+            0% {
+              background-position: 0% 50%;
+            }
+            50% {
+              background-position: 100% 50%;
+            }
+            100% {
+              background-position: 0% 50%;
+            }
+          }
+        `}</style>
+
         {/* Navigation Icons */}
         <DockIcon icon={<RiUserLine />} label="About" href="#about" />
         <DockIcon icon={<RiBriefcase2Line />} label="Work" href="#work" />

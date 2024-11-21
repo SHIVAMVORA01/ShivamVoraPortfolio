@@ -6,7 +6,6 @@ import {
   Linkedin,
   Mail,
   Target,
-  ArrowRight, 
 } from "lucide-react";
 
 import { experiences } from "./components/Experience";
@@ -15,11 +14,11 @@ import { skills } from "./components/Skills";
 import {
   about,
   contact,
-  hero,
   inspiringQuote,
   sectionTitle,
 } from "./components/About";
 import { Dock } from "./components/Dock";
+import ShimmerButton from "./components/ShimmerButton";
 
 interface Project {
   id: number;
@@ -71,7 +70,7 @@ export default function Portfolio() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [activeFile, setActiveFile] = useState<FileType | null>(null);
   const [showTopButton, setShowTopButton] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true); // Changed to true for default dark mode
   const [showAllProjects, setShowAllProjects] = useState(false);
 
   // Handle dark mode toggle
@@ -79,26 +78,30 @@ export default function Portfolio() {
     setDarkMode(!darkMode);
   };
 
-  // Sync dark mode with localStorage and document
+  // Initialize dark mode
   useEffect(() => {
-    const sections = [
-      document.querySelector(".hero-section"),
-      document.querySelector("nav"),
-      document.querySelector("#contact"),
-    ];
+    // Check if dark mode is set in localStorage
+    const savedMode = localStorage.getItem("darkMode");
 
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('darkMode', 'true');
-      // Reset background colors for dark mode
-      sections.forEach((section) => {
-        if (section) {
-          (section as HTMLElement).style.background = '';
-        }
-      });
+    // If no preference is saved, or if it's set to true, enable dark mode
+    if (savedMode === null || savedMode === "true") {
+      document.documentElement.classList.add("dark");
+      setDarkMode(true);
+      localStorage.setItem("darkMode", "true");
     } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('darkMode', 'false');
+      document.documentElement.classList.remove("dark");
+      setDarkMode(false);
+    }
+  }, []);
+
+  // Sync dark mode changes
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("darkMode", "true");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("darkMode", "false");
     }
   }, [darkMode]);
 
@@ -120,33 +123,6 @@ export default function Portfolio() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const sections = [
-      document.querySelector(".hero-section"),
-      document.querySelector("nav"),
-      document.querySelector("#contact"),
-    ];
-    let colorIndex = 0;
-    const colors = ["#FFFAE3", "#E3F9FF", "#F0EFFF", "#E8FDF5", "#FFF5F3"];
-
-    const changeColor = () => {
-      // Only change colors if not in dark mode
-      if (!document.documentElement.classList.contains('dark')) {
-        sections.forEach((section) => {
-          if (section) {
-            (section as HTMLElement).style.transition = "background 2s ease-out";
-            (section as HTMLElement).style.background = colors[colorIndex];
-          }
-        });
-        colorIndex = (colorIndex + 1) % colors.length;
-      }
-    };
-
-    const intervalId = setInterval(changeColor, 6000);
-
-    return () => clearInterval(intervalId);
   }, []);
 
   const handleFileOpen = (file: FileType) => {
@@ -188,28 +164,59 @@ export default function Portfolio() {
           text-align: center;
         }
       `}</style>
-
-      <Dock darkMode={darkMode} toggleDarkMode={toggleDarkMode} showTopButton={showTopButton} scrollToTop={scrollToTop} />
+      <Dock
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        showTopButton={showTopButton}
+        scrollToTop={scrollToTop}
+      />
 
       {/* Hero Section */}
-      <section className="hero-section min-h-screen flex flex-col justify-center bg-blue-50 dark:bg-gray-800 px-6 pt-20">
-        <div className="text-center">
-          <h1 className="hero-title text-gray-900 dark:text-white">{hero.intro}</h1>
-          <div className="flex items-center justify-center mt-6">
+      <section className="relative min-h-screen flex flex-col justify-center items-center bg-[#F8F8FF] dark:bg-gray-900 px-4">
+        {/* Full Grid Background */}
+        <div className="absolute inset-0 grid grid-cols-12 gap-4 p-4 pointer-events-none">
+          {Array.from({ length: 144 }).map((_, i) => (
+            <div
+              key={i}
+              className="w-full h-full border border-gray-550 dark:border-gray-700"
+            />
+          ))}
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10">
+          <div className="text-center">
+            {/* Hi with mask */}
             <div className="relative">
-              <img
-                src="/images/Shivam.png"
-                alt="Shivam Vora"
-                className="w-full h-auto max-w-[256px] max-h-[256px] md:max-w-[320px] md:max-h-[320px] object-contain rounded-lg"
-              />
+              <div className="absolute -inset-4 bg-[#F8F8FF] dark:bg-gray-900 blur-sm" />
+              <h1 className="relative z-10 text-6xl md:text-8xl font-bold mb-4 leading-tight text-gray-900 dark:text-white">
+                Hi
+              </h1>
+            </div>
+
+            {/* Name with mask */}
+            <div className="relative">
+              <div className="absolute -inset-4 bg-[#F8F8FF] dark:bg-gray-900 blur-sm" />
+              <div className="relative z-10 text-4xl md:text-7xl font-bold mb-8 leading-tight text-gray-900 dark:text-white">
+                I am{" "}
+                <span className="relative inline-block">
+                  Shivam Vora
+                  <span className="absolute inset-x-0 bottom-0 h-2 -z-10 transform skew-x-12 bg-[linear-gradient(108deg,_#0894FF,_#C959DD_34%,_#FF2E54_68%,_#FF9004)]" />
+                  </span>
+              </div>
+            </div>
+
+            {/* Description with mask */}
+            <div className="relative">
+              <div className="absolute -inset-4 bg-[#F8F8FF] dark:bg-gray-900 blur-sm" />
+              <p className="relative z-10 text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
+                Designer by Heart, Coder by Profession
+              </p>
+              <p className="relative z-10 text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
+                Currently working at Belden Inc as an R&D Software Developer.
+              </p>
             </div>
           </div>
-          <p className="text-xl font-bold text-gray-600 dark:text-gray-300 mt-8 max-w-lg mx-auto">
-            {hero.tagline}
-          </p>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mt-8 max-w-lg mx-auto">
-            {hero.content}
-          </p>
         </div>
       </section>
 
@@ -236,67 +243,75 @@ export default function Portfolio() {
                     {project.description}
                   </p>
                 </div>
-                <div className="flex justify-center p-4"> {/* Center the image and add padding */}
+                <div className="flex justify-center p-4">
+                  {" "}
+                  {/* Center the image and add padding */}
                   <img
                     src={project.image}
                     alt={project.title}
                     className="object-cover rounded-lg" // Removed size constraints
                   />
                 </div>
-                <div className="p-4"> {/* Add padding around the button */}
-                  <button
+                <div className="p-4">
+                  {" "}
+                  {/* Add padding around the ShimmerButton */}
+                  <ShimmerButton
                     className="w-full bg-black text-white py-3 font-semibold rounded-full hover:bg-gray-800 transition-colors duration-300"
                     onClick={() => setActiveProject(project)}
                   >
                     Know more
-                  </button>
+                  </ShimmerButton>
                 </div>
               </div>
             ))}
-            {showAllProjects && projects.slice(2).map((project) => (
-              <div
-                key={project.id}
-                className="group bg-white-50 dark:bg-gray-800 shadow-md rounded-xl overflow-hidden m-4" // Added margin
-              >
-                <div className="p-6">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    {project.description}
-                  </p>
+            {showAllProjects &&
+              projects.slice(2).map((project) => (
+                <div
+                  key={project.id}
+                  className="group bg-white-50 dark:bg-gray-800 shadow-md rounded-xl overflow-hidden m-4" // Added margin
+                >
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      {project.description}
+                    </p>
+                  </div>
+                  <div className="flex justify-center p-4">
+                    {" "}
+                    {/* Center the image and add padding */}
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="object-cover rounded-lg" // Removed size constraints
+                    />
+                  </div>
+                  <div className="p-4">
+                    {" "}
+                    {/* Add padding around the ShimmerButton */}
+                    <ShimmerButton
+                      className="w-full bg-black text-white py-3 font-semibold rounded-full hover:bg-gray-800 transition-colors duration-300"
+                      onClick={() => setActiveProject(project)}
+                    >
+                      Know more
+                    </ShimmerButton>
+                  </div>
                 </div>
-                <div className="flex justify-center p-4"> {/* Center the image and add padding */}
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="object-cover rounded-lg" // Removed size constraints
-                  />
-                </div>
-                <div className="p-4"> {/* Add padding around the button */}
-                  <button
-                    className="w-full bg-black text-white py-3 font-semibold rounded-full hover:bg-gray-800 transition-colors duration-300"
-                    onClick={() => setActiveProject(project)}
-                  >
-                    Know more
-                  </button>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
           {!showAllProjects && (
             <div className="flex justify-center mt-8">
-              <button
+              <ShimmerButton
                 className="bg-black text-white py-3 px-6 font-semibold rounded-full hover:bg-gray-800 transition-colors duration-300"
                 onClick={() => setShowAllProjects(true)}
               >
                 See More
-              </button>
+              </ShimmerButton>
             </div>
           )}
         </div>
       </section>
-
       <section
         id="about"
         className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 dark:bg-gray-800 px-6"
@@ -307,18 +322,30 @@ export default function Portfolio() {
           </h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">{about.intro1}</p>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">{about.intro2}</p>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                {about.intro1}
+              </p>
+              <p className="text-gray-600 dark:text.gray-300 mb-6">
+                {about.intro2}
+              </p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="bg-white dark:bg-gray-700 p-6 rounded-xl">
                   <Briefcase className="h-6 w-6 text-gray-900 dark:text-white mb-4" />
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Experience</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">{about.experience}</p>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+                    Experience
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    {about.experience}
+                  </p>
                 </div>
-                <div className="bg-white dark:bg-gray-700 p-6 rounded-xl">
+                <div className="bg-white dark:bg.gray-700 p-6 rounded-xl">
                   <Award className="h-6 w-6 text-gray-900 dark:text-white mb-4" />
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">Recognition</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">{about.recognition}</p>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">
+                    Recognition
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    {about.recognition}
+                  </p>
                 </div>
               </div>
             </div>
@@ -366,7 +393,6 @@ export default function Portfolio() {
           </div>
         </div>
       </section>
-
       {/* Experience Section */}
       <section
         id="experience"
@@ -378,11 +404,16 @@ export default function Portfolio() {
           </h2>
           <div className="space-y-8">
             {experiences.map((experience) => (
-              <div key={experience.id} className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6">
+              <div
+                key={experience.id}
+                className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6"
+              >
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   {experience.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">{experience.period}</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  {experience.period}
+                </p>
 
                 {/* Render each statement in description */}
                 <ul className="text-gray-600 dark:text-gray-300 list-disc mb-8 pl-5 space-y-3">
@@ -416,7 +447,6 @@ export default function Portfolio() {
           </div>
         </div>
       </section>
-
       {/* Reusable Modal Component */}
       {(activeProject || activeFile) && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -495,7 +525,6 @@ export default function Portfolio() {
           </div>
         </div>
       )}
-
       {activeProject && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
@@ -514,7 +543,9 @@ export default function Portfolio() {
                   >
                     {activeProject.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300">{activeProject.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {activeProject.description}
+                  </p>
                 </div>
                 <button
                   onClick={() => setActiveProject(null)}
@@ -565,14 +596,16 @@ export default function Portfolio() {
               </p>
               {activeProject.details.problemStatementImages && (
                 <div className="space-y-4 mb-8">
-                  {activeProject.details.problemStatementImages.map((image, index) => (
-                    <img
-                      key={index}
-                      src={image}
-                      alt={`Problem statement illustration ${index + 1}`}
-                      className="w-full h-auto rounded-lg shadow-md dark:bg-white"
-                    />
-                  ))}
+                  {activeProject.details.problemStatementImages.map(
+                    (image, index) => (
+                      <img
+                        key={index}
+                        src={image}
+                        alt={`Problem statement illustration ${index + 1}`}
+                        className="w-full h-auto rounded-lg shadow-md dark:bg-white"
+                      />
+                    )
+                  )}
                 </div>
               )}
 
@@ -701,7 +734,7 @@ export default function Portfolio() {
                           <img
                             src={feature.image}
                             alt={`${feature.title} image`}
-                            className="w-full h-auto mt-2 dark:bg-white"
+                            className="w-full h-auto mt-2 dark:bg.white"
                           />{" "}
                           {/* Added mt-2 for extra padding below content */}
                         </div>
@@ -757,9 +790,9 @@ export default function Portfolio() {
                   </div>
                 </div>
               )}
-              {/* Scroll to top button before the next project section */}
+              {/* Scroll to top ShimmerButton before the next project section */}
               <div className="flex justify-end mt-12 mb-8">
-                <button
+                <ShimmerButton
                   onClick={() => {
                     const titleElement = document.getElementById(
                       `project-title-${activeProject.id}`
@@ -784,7 +817,7 @@ export default function Portfolio() {
                       d="M5 10l7-7m0 0l7 7m-7-7v18"
                     />
                   </svg>
-                </button>
+                </ShimmerButton>
               </div>
 
               {/* Next project navigation */}
@@ -815,7 +848,8 @@ export default function Portfolio() {
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                    >recognition
+                    >
+                      recognition
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -840,13 +874,19 @@ export default function Portfolio() {
           </h2>
           <div className="grid md:grid-cols-4 gap-8">
             {skills.map((skillGroup, index) => (
-              <div key={index} className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+              <div
+                key={index}
+                className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md"
+              >
                 <h3 className="font-bold text-gray-900 dark:text-white mb-4">
                   {skillGroup.category}
                 </h3>
                 <ul className="space-y-2">
                   {skillGroup.items.map((skill, skillIndex) => (
-                    <li key={skillIndex} className="text-gray-600 dark:text-gray-300">
+                    <li
+                      key={skillIndex}
+                      className="text-gray-600 dark:text-gray-300"
+                    >
                       {skill}
                     </li>
                   ))}
@@ -856,13 +896,23 @@ export default function Portfolio() {
           </div>
         </div>
       </section>
-
       {/* Contact Section */}
       <section
         id="contact"
-        className="min-h-screen flex flex-col justify-center py-20 px-6"
+        className="relative min-h-screen flex flex-col justify-center py-20 px-6 bg-[#F8F8FF] dark:bg-gray-900"
       >
-        <div className="container mx-auto max-w-6xl">
+        {/* Grid Background */}
+        <div className="absolute inset-0 grid grid-cols-12 gap-4 p-4 pointer-events-none">
+          {Array.from({ length: 144 }).map((_, i) => (
+            <div
+              key={i}
+              className="w-full h-full border border-gray-550 dark:border-gray-700"
+            />
+          ))}
+        </div>
+
+        {/* Main Content */}
+        <div className="relative z-10 container mx-auto max-w-6xl">
           <div className="bg-gray-900 dark:bg-[#1F2937] rounded-2xl p-12 text-center">
             <h2 className="section-title text-white mb-4">{contact.intro1}</h2>
             <h2 className="text-gray-400 mb-8 max-w-2xl mx-auto">
@@ -871,7 +921,7 @@ export default function Portfolio() {
             <div className="flex flex-col items-center space-y-4">
               <a
                 href="https://www.linkedin.com/in/shivam-vora/"
-                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100 w-[186px]"
+                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100 w-[150px]"
               >
                 <Linkedin className="h-5 w-5 mr-2" />
                 LinkedIn
@@ -880,17 +930,17 @@ export default function Portfolio() {
                 href="/files/Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100 w-[186px]"
+                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100 w-[150px]"
               >
                 <Briefcase className="h-5 w-5 mr-2" />
-                View Resume
+                Resume
               </a>
               <a
                 href="mailto:vorashivam24@gmail.com"
-                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100 w-[186px]"
+                className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100 w-[150px]"
               >
                 <Mail className="h-5 w-5 mr-2" />
-                Email Me
+                Email
               </a>
             </div>
           </div>
@@ -898,4 +948,4 @@ export default function Portfolio() {
       </section>
     </div>
   );
-};
+}

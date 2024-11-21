@@ -34,7 +34,7 @@ export const contact: Contact = {
 };
 
 export const sectionTitle: SectionTitle = {
-  portfolio: "Look What I Made! ",
+  portfolio: "Featured Projects",
   about: "A Little About Me",
   experience: "Experiences That Shaped Me",
   skills: "What I am Good At",
