@@ -32,7 +32,7 @@ const DockIcon = ({ icon, label, href, onClick, isDivider, className }: DockIcon
 
   if (isDivider) {
     return (
-      <div className="h-8 w-px bg-gray-300/50 dark:bg-gray-600/50 mx-2 self-center" />
+      <div className="h-8 md:h-px w-px md:w-8 bg-gray-300/50 dark:bg-gray-600/50 mx-2 md:mx-0 md:my-2 self-center" />
     );
   }
 
@@ -70,9 +70,8 @@ const DockIcon = ({ icon, label, href, onClick, isDivider, className }: DockIcon
           {icon}
         </div>
       </motion.div>
-      <div className="absolute -top-12 scale-0 rounded-md bg-gray-800/90 dark:bg-gray-700/90 px-3 py-2 text-sm text-white opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200">
+      <div className="absolute md:right-full md:mr-4 md:top-1/2 md:-translate-y-1/2 -top-12 scale-0 rounded-md bg-gray-800/90 dark:bg-gray-700/90 px-3 py-2 text-sm text-white opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200">
         {label}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-gray-800/90 dark:bg-gray-700/90" />
       </div>
     </BaseComponent>
   );
@@ -87,13 +86,13 @@ interface DockProps {
 
 export const Dock = ({ darkMode, toggleDarkMode, showTopButton, scrollToTop }: DockProps) => {
   return (
-    <div className="fixed bottom-8 w-screen flex justify-center items-center z-50">
+    <div className="fixed bottom-8 md:bottom-auto md:right-8 md:top-1/2 md:transform md:-translate-y-1/2 w-screen md:w-auto flex justify-center md:justify-start items-center z-50">
       <motion.div
-        className="flex h-20 items-center gap-2 px-6 rounded-2xl 
+        className="flex md:flex-col h-20 md:h-auto items-center gap-2 px-6 md:px-2 py-2 md:py-6 rounded-2xl 
           bg-white dark:bg-gray-800 
-          border-[1.5px] border-gray-200/50 dark:border-gray-700/50 
+          border-[1.5px] border-gray-300 dark:border-gray-600 
           shadow-[0_2px_10px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_10px_rgba(0,0,0,0.2)]
-          hover:border-gray-300/50 dark:hover:border-gray-600/50 
+          hover:border-gray-400 dark:hover:border-gray-500 
           transition-all duration-300"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -115,7 +114,7 @@ export const Dock = ({ darkMode, toggleDarkMode, showTopButton, scrollToTop }: D
           onClick={toggleDarkMode}
         />
 
-        {/* Back to Top Button */}
+        {/* Back to Top Button - Always visible when showTopButton is true */}
         {showTopButton && (
           <DockIcon 
             icon={<ArrowUp />}

@@ -72,6 +72,7 @@ export default function Portfolio() {
   const [activeFile, setActiveFile] = useState<FileType | null>(null);
   const [showTopButton, setShowTopButton] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   // Handle dark mode toggle
   const toggleDarkMode = () => {
@@ -191,7 +192,7 @@ export default function Portfolio() {
       <Dock darkMode={darkMode} toggleDarkMode={toggleDarkMode} showTopButton={showTopButton} scrollToTop={scrollToTop} />
 
       {/* Hero Section */}
-      <section className="hero-section min-h-screen flex flex-col bg-blue-50 dark:bg-gray-800 px-6 pt-20">
+      <section className="hero-section min-h-screen flex flex-col justify-center bg-blue-50 dark:bg-gray-800 px-6 pt-20">
         <div className="text-center">
           <h1 className="hero-title text-gray-900 dark:text-white">{hero.intro}</h1>
           <div className="flex items-center justify-center mt-6">
@@ -221,42 +222,78 @@ export default function Portfolio() {
           <h2 className="section-title text-gray-900 dark:text-white mb-12">
             {sectionTitle.portfolio}
           </h2>
-          <div className="grid md:grid-cols-2 gap-8 ">
-            {projects.map((project) => (
+          <div className="grid md:grid-cols-2 gap-8">
+            {projects.slice(0, 2).map((project) => (
               <div
                 key={project.id}
-                className="group bg-white-50 dark:bg-gray-800 shadow-md rounded-xl overflow-hidden cursor-pointer"
-                onClick={() => setActiveProject(project)}
+                className="group bg-white-50 dark:bg-gray-800 shadow-md rounded-xl overflow-hidden m-4" // Added margin
               >
-                <div className="relative overflow-hidden">
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    {project.description}
+                  </p>
+                </div>
+                <div className="flex justify-center p-4"> {/* Center the image and add padding */}
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full transform group-hover:scale-105 transition-transform duration-300 dark:bg-white"
+                    className="object-cover rounded-lg" // Removed size constraints
                   />
                 </div>
-                <div className="p-6 flex items-center justify-between">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {project.tags.map((tag, index) => (
-                        <span
-                          key={index}
-                          className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 text-sm rounded-full"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <ArrowRight className="h-6 w-6 text-gray-900 dark:text-white" />
+                <div className="p-4"> {/* Add padding around the button */}
+                  <button
+                    className="w-full bg-black text-white py-3 font-semibold rounded-full hover:bg-gray-800 transition-colors duration-300"
+                    onClick={() => setActiveProject(project)}
+                  >
+                    Know more
+                  </button>
+                </div>
+              </div>
+            ))}
+            {showAllProjects && projects.slice(2).map((project) => (
+              <div
+                key={project.id}
+                className="group bg-white-50 dark:bg-gray-800 shadow-md rounded-xl overflow-hidden m-4" // Added margin
+              >
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    {project.description}
+                  </p>
+                </div>
+                <div className="flex justify-center p-4"> {/* Center the image and add padding */}
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="object-cover rounded-lg" // Removed size constraints
+                  />
+                </div>
+                <div className="p-4"> {/* Add padding around the button */}
+                  <button
+                    className="w-full bg-black text-white py-3 font-semibold rounded-full hover:bg-gray-800 transition-colors duration-300"
+                    onClick={() => setActiveProject(project)}
+                  >
+                    Know more
+                  </button>
                 </div>
               </div>
             ))}
           </div>
+          {!showAllProjects && (
+            <div className="flex justify-center mt-8">
+              <button
+                className="bg-black text-white py-3 px-6 font-semibold rounded-full hover:bg-gray-800 transition-colors duration-300"
+                onClick={() => setShowAllProjects(true)}
+              >
+                See More
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
