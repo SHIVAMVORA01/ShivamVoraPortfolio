@@ -794,7 +794,7 @@ export default function Portfolio() {
               )}
               {/* Scroll to top ShimmerButton before the next project section */}
               <div className="flex justify-end mt-12 mb-8">
-                <ShimmerButton
+                <button
                   onClick={() => {
                     const titleElement = document.getElementById(
                       `project-title-${activeProject.id}`
@@ -819,7 +819,7 @@ export default function Portfolio() {
                       d="M5 10l7-7m0 0l7 7m-7-7v18"
                     />
                   </svg>
-                </ShimmerButton>
+                </button>
               </div>
 
               {/* Next project navigation */}
