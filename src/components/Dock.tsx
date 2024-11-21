@@ -90,14 +90,22 @@ export const Dock = ({ darkMode, toggleDarkMode, showTopButton, scrollToTop }: D
       <motion.div
         className="flex md:flex-col h-20 md:h-auto items-center gap-2 px-6 md:px-2 py-2 md:py-6 rounded-2xl 
           bg-white dark:bg-gray-800 
-          border-[1.5px] border-gray-300 dark:border-gray-600 
           shadow-[0_2px_10px_rgba(0,0,0,0.05)] dark:shadow-[0_2px_10px_rgba(0,0,0,0.2)]
-          hover:border-gray-400 dark:hover:border-gray-500 
-          transition-all duration-300"
+          transition-all duration-300
+          relative"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
+        style={{
+          position: 'relative',
+        }}
       >
+        {/* Add gradient border using pseudo-element */}
+        <div className="absolute -inset-[1.5px] rounded-2xl z-[-1]"
+          style={{
+            background: 'linear-gradient(108deg, #0894FF, #C959DD 34%, #FF2E54 68%, #FF9004)',
+          }}
+        />
         {/* Navigation Icons */}
         <DockIcon icon={<RiUserLine />} label="About" href="#about" />
         <DockIcon icon={<RiBriefcase2Line />} label="Work" href="#work" />
