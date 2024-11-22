@@ -72,9 +72,14 @@ export default function Portfolio() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [activeFile, setActiveFile] = useState<FileType | null>(null);
   const [showTopButton, setShowTopButton] = useState(false);
-  const [darkMode, setDarkMode] = useState(true); // Changed to true for default dark mode
+  const [darkMode, setDarkMode] = useState(true); // Default to true for dark mode
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [activeExperience, setActiveExperience] = useState<number | null>(null);
+
+  // Add this utility function at the top of the component
+  const getImageClassName = (baseClasses: string) => {
+    return `${baseClasses} dark:bg-white`;
+  };
 
   // Handle dark mode toggle
   const toggleDarkMode = () => {
@@ -255,7 +260,7 @@ export default function Portfolio() {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="object-cover rounded-lg" // Removed size constraints
+                    className={getImageClassName("object-cover rounded-lg")} // Updated image class
                   />
                 </div>
                 <div className="p-4">
@@ -290,7 +295,7 @@ export default function Portfolio() {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="object-cover rounded-lg" // Removed size constraints
+                      className={getImageClassName("object-cover rounded-lg")} // Updated image class
                     />
                   </div>
                   <div className="p-4">
@@ -460,7 +465,7 @@ export default function Portfolio() {
                           key={index}
                           src={file.type === "image" ? file.src : "/images/pdf.png"}
                           alt="File Preview"
-                          className="w-12 h-16 shadow-md cursor-pointer dark:bg-white"
+                          className={getImageClassName("w-12 h-16 shadow-md cursor-pointer")} // Updated image class
                           onClick={() => handleFileOpen(file)}
                         />
                       ))}
@@ -535,7 +540,7 @@ export default function Portfolio() {
                     <img
                       src={activeFile.src}
                       alt="File Preview"
-                      className="w-full h-auto rounded-md dark:bg-white"
+                      className={getImageClassName("w-full h-auto rounded-md")} // Updated image class
                     />
                   ) : (
                     <iframe
@@ -627,7 +632,7 @@ export default function Portfolio() {
                         key={index}
                         src={image}
                         alt={`Problem statement illustration ${index + 1}`}
-                        className="w-full h-auto rounded-lg shadow-md dark:bg-white"
+                        className={getImageClassName("w-full h-auto rounded-lg shadow-md")} // Updated image class
                       />
                     )
                   )}
@@ -667,7 +672,7 @@ export default function Portfolio() {
                           <img
                             src={insight.image}
                             alt={`${insight.title} image`}
-                            className="w-full h-auto dark:bg-white"
+                            className={getImageClassName("w-full h-auto")} // Updated image class
                           />
                         </div>
                       )}
@@ -691,35 +696,24 @@ export default function Portfolio() {
                 Crafting the Solution
               </h4>
               <ul className="text-gray-600 dark:text-gray-300 list-disc mb-8 pl-5 space-y-6">
-                {" "}
-                {/* Increased space-y for better separation */}
                 {activeProject.details.designProcess.map((step, index) => (
                   <li key={index} className="space-y-3">
-                    {" "}
-                    {/* Added space-y for consistent spacing within each item */}
-                    <div className="font-bold">{step.title}</div>{" "}
-                    {/* Title in bold */}
-                    <div>{step.content}</div> {/* Content */}
-                    {/* Render subPoints as bullet points if they exist */}
+                    <div className="font-bold">{step.title}</div>
+                    <div>{step.content}</div>
                     {step.subPoints && step.subPoints.length > 0 ? (
                       <ul className="list-disc list-inside ml-4 space-y-1">
-                        {" "}
-                        {/* Spacing between subpoints */}
                         {step.subPoints.map((point, i) => (
                           <li key={i}>{point}</li>
                         ))}
                       </ul>
                     ) : (
-                      /* Add margin-top if no subPoints */
                       step.image && (
                         <div className="mt-4">
-                          {" "}
                           <img
                             src={step.image}
                             alt={`${step.title} image`}
-                            className="w-full h-auto mt-8 dark:bg.white"
-                          />{" "}
-                          {/* Added mt-2 for extra padding below content */}
+                            className={getImageClassName("w-full h-auto mt-8")} // Updated image class
+                          />
                         </div>
                       )
                     )}
@@ -759,7 +753,7 @@ export default function Portfolio() {
                           <img
                             src={feature.image}
                             alt={`${feature.title} image`}
-                            className="w-full h-auto mt-2 dark:bg.white"
+                            className={getImageClassName("w-full h-auto mt-2")} // Updated image class
                           />{" "}
                           {/* Added mt-2 for extra padding below content */}
                         </div>
@@ -808,7 +802,7 @@ export default function Portfolio() {
                           file.type === "image" ? file.src : "/images/pdf.png"
                         } // Show PDF icon if it's a PDF file
                         alt="File Preview"
-                        className="w-12 h-16 shadow-md cursor-pointer dark:bg-white"
+                        className={getImageClassName("w-12 h-16 shadow-md cursor-pointer")} // Updated image class
                         onClick={() => window.open(file.src, "_blank")} // Opens file in a new window
                       />
                     ))}
