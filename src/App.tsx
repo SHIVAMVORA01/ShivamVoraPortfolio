@@ -188,7 +188,7 @@ export default function Portfolio() {
       <section className="relative min-h-screen flex flex-col justify-center items-center bg-[#F8F8FF] dark:bg-gray-900 px-4 pt-16 md:pt-0">
         {/* Logo */}
         <div className="absolute top-4 md:top-8 left-1/2 transform -translate-x-1/2 z-20">
-          <img src="public/images/logo.png" alt="Logo" className="h-12 md:h-16" />
+          <img src="images/logo.png" alt="Logo" className="h-12 md:h-16" />
         </div>
 
         {/* Full Grid Background */}
