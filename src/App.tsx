@@ -930,7 +930,7 @@ export default function Portfolio() {
       >
         {/* Grid Background */}
         <div className="absolute inset-0 grid grid-cols-[repeat(auto-fill,minmax(50px,1fr))] grid-rows-[repeat(auto-fill,minmax(50px,1fr))] gap-0 pointer-events-none min-h-screen">
-          {Array.from({ length: 406 }).map((_, i) => (
+          {Array.from({ length: 606 }).map((_, i) => (
             <div
               key={i}
               className="w-full h-[50px] border-[0.5px] border-gray-200 dark:border-gray-800"
