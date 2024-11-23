@@ -192,11 +192,11 @@ export default function Portfolio() {
         </div>
 
         {/* Full Grid Background */}
-        <div className="absolute inset-0 grid grid-cols-[repeat(auto-fill,minmax(50px,1fr))] grid-rows-[repeat(auto-fill,minmax(50px,1fr))] gap-0 pointer-events-none">
-          {Array.from({ length: 550 }).map((_, i) => (
+        <div className="absolute inset-0 grid grid-cols-12 gap-4 p-4 pointer-events-none">
+          {Array.from({ length: 144 }).map((_, i) => (
             <div
               key={i}
-              className="w-full h-full border-[0.5px] border-gray-200 dark:border-gray-800"
+              className="w-full h-full border border-gray-550 dark:border-gray-800"
             />
           ))}
         </div>
@@ -929,11 +929,11 @@ export default function Portfolio() {
         className="relative min-h-screen flex flex-col justify-center py-20 px-6 bg-[#F8F8FF] dark:bg-gray-900"
       >
         {/* Grid Background */}
-        <div className="absolute inset-0 grid grid-cols-[repeat(auto-fill,minmax(50px,1fr))] grid-rows-[repeat(auto-fill,minmax(50px,1fr))] gap-0 pointer-events-none min-h-screen">
-          {Array.from({ length: 606 }).map((_, i) => (
+        <div className="absolute inset-0 grid grid-cols-12 gap-4 p-4 pointer-events-none">
+          {Array.from({ length: 144 }).map((_, i) => (
             <div
               key={i}
-              className="w-full h-[50px] border-[0.5px] border-gray-200 dark:border-gray-800"
+              className="w-full h-full border border-gray-550 dark:border-gray-800"
             />
           ))}
         </div>
