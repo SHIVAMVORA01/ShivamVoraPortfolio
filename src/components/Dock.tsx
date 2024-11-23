@@ -91,7 +91,8 @@ export const Dock = ({ darkMode, toggleDarkMode, showTopButton, scrollToTop }: D
   const dockAnimation = {
     initial: { y: "100%", opacity: 0 },
     animate: { 
-      y: isVisible ? "calc(100vh - 144px)" : "100%",
+      // Move up higher from the bottom by adjusting this value
+      y: isVisible ? "calc(100vh - 180px)" : "100%",
       opacity: isVisible ? 1 : 0
     },
     transition: { 
@@ -206,7 +207,7 @@ export const Dock = ({ darkMode, toggleDarkMode, showTopButton, scrollToTop }: D
       {/* Initial Toggle Button (only visible when dock is hidden) */}
       {!isVisible && (
         <motion.div
-          className="fixed bottom-8 w-full flex justify-center z-50"
+          className="fixed bottom-12 w-full flex justify-center z-50"  // Changed from bottom-8 to bottom-12
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 20, opacity: 0 }}
