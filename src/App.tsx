@@ -76,9 +76,10 @@ export default function Portfolio() {
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [activeExperience, setActiveExperience] = useState<number | null>(null);
 
-  // Add this utility function at the top of the component
-  const getImageClassName = (baseClasses: string) => {
-    return `${baseClasses} dark:bg-white`;
+  // Update the utility function to handle PDF icons
+  const getImageClassName = (baseClasses: string, src?: string) => {
+    const isPdfIcon = src?.endsWith('/pdf.png');
+    return isPdfIcon ? baseClasses : `${baseClasses} dark:bg-white`;
   };
 
   // Handle dark mode toggle
@@ -184,13 +185,18 @@ export default function Portfolio() {
       />
 
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] md:min-h-screen flex flex-col justify-center items-center bg-[#F8F8FF] dark:bg-gray-900 px-4 pt-16 md:pt-0">
+      <section className="relative min-h-screen flex flex-col justify-center items-center bg-[#F8F8FF] dark:bg-gray-900 px-4 pt-16 md:pt-0">
+        {/* Logo */}
+        <div className="absolute top-4 md:top-8 left-1/2 transform -translate-x-1/2 z-20">
+          <img src="/public/images/logo.png" alt="Logo" className="h-12 md:h-16" />
+        </div>
+
         {/* Full Grid Background */}
-        <div className="absolute inset-0 grid grid-cols-12 gap-4 p-4 pointer-events-none">
-          {Array.from({ length: 144 }).map((_, i) => (
+        <div className="absolute inset-0 grid grid-cols-[repeat(auto-fill,minmax(50px,1fr))] grid-rows-[repeat(auto-fill,minmax(50px,1fr))] gap-0 pointer-events-none">
+          {Array.from({ length: 550 }).map((_, i) => (
             <div
               key={i}
-              className="w-full h-full border border-gray-550 dark:border-gray-800"
+              className="w-full h-full border-[0.5px] border-gray-200 dark:border-gray-800"
             />
           ))}
         </div>
@@ -234,7 +240,7 @@ export default function Portfolio() {
       {/* Portfolio Section */}
       <section
         id="work"
-        className="min-h-screen flex flex-col justify-center py-20 bg-white-50 dark:bg-gray-900 px-6"
+        className="min-h-screen flex flex-col justify-center py-20 bg-white-50 dark:bg-[#1B2738] px-6"
       >
         <div className="container mx-auto max-w-6xl">
           <h2 className="section-title text-gray-900 dark:text-white mb-12">
@@ -244,13 +250,13 @@ export default function Portfolio() {
             {projects.slice(0, 2).map((project) => (
               <div
                 key={project.id}
-                className="group bg-white-50 dark:bg-gray-800 shadow-md rounded-xl overflow-hidden m-4" // Added margin
+                className="group bg-white-50 dark:bg-[#020F22] shadow-md rounded-xl overflow-hidden m-4" // Removed border classes
               >
                 <div className="p-6">
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  <p className="text-gray-600 dark:text-white mb-4">
                     {project.description}
                   </p>
                 </div>
@@ -260,14 +266,14 @@ export default function Portfolio() {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className={getImageClassName("object-cover rounded-lg")} // Updated image class
+                    className={getImageClassName("object-cover rounded-lg", project.image)} // Updated image class
                   />
                 </div>
                 <div className="p-4">
                   {" "}
                   {/* Add padding around the ShimmerButton */}
                   <ShimmerButton
-                    className="w-full bg-black text-white py-3 font-semibold rounded-full hover:bg-gray-800 transition-colors duration-300"
+                    className="w-full bg-white text-white py-3 font-semibold rounded-full hover:bg-gray-800 transition-colors duration-300"
                     onClick={() => setActiveProject(project)}
                   >
                     Know more
@@ -279,13 +285,13 @@ export default function Portfolio() {
               projects.slice(2).map((project) => (
                 <div
                   key={project.id}
-                  className="group bg-white-50 dark:bg-gray-800 shadow-md rounded-xl overflow-hidden m-4" // Added margin
+                  className="group bg-white-50 dark:bg-[#020F22] shadow-md rounded-xl overflow-hidden m-4" // Removed border classes
                 >
                   <div className="p-6">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    <p className="text-gray-600 dark:text-white mb-4">
                       {project.description}
                     </p>
                   </div>
@@ -295,7 +301,7 @@ export default function Portfolio() {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className={getImageClassName("object-cover rounded-lg")} // Updated image class
+                      className={getImageClassName("object-cover rounded-lg", project.image)} // Updated image class
                     />
                   </div>
                   <div className="p-4">
@@ -327,7 +333,7 @@ export default function Portfolio() {
       {/* About Section */}
       <section
         id="about"
-        className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 dark:bg-gray-800 px-6"
+        className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 dark:bg-[#020F22] px-6"
       >
         <div className="container mx-auto max-w-6xl">
           <h2 className="section-title text-gray-900 dark:text-white mb-12">
@@ -409,7 +415,7 @@ export default function Portfolio() {
       {/* Experience Section */}
       <section
         id="experience"
-        className="min-h-screen flex flex-col justify-center py-20 bg-white dark:bg-gray-900 px-6"
+        className="min-h-screen flex flex-col justify-center py-20 bg-white dark:bg-[#1B2738] px-6"
       >
         <div className="container mx-auto max-w-6xl">
           <h2 className="section-title text-gray-900 dark:text-white mb-12">
@@ -425,7 +431,7 @@ export default function Portfolio() {
             }) => (
               <React.Fragment key={experience.id}>
                 <div
-                  className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 cursor-pointer flex justify-between items-center"
+                  className="bg-gray-50 dark:bg-[#020F22] rounded-xl p-6 cursor-pointer flex justify-between items-center"
                   onClick={() => toggleExperience(experience.id)}
                 >
                   <div>
@@ -445,7 +451,7 @@ export default function Portfolio() {
                   </div>
                 </div>
                 {activeExperience === experience.id && (
-                  <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 mt-2">
+                  <div className="bg-gray-50 dark:bg-[#020F22] rounded-xl p-6 mt-2">
                     <ul className="text-gray-600 dark:text-gray-300 list-disc mb-8 pl-5 space-y-3">
                       {experience.description.map((statement: string, index: number) => (
                         <li key={index} className="ml-4">
@@ -465,7 +471,7 @@ export default function Portfolio() {
                           key={index}
                           src={file.type === "image" ? file.src : "/images/pdf.png"}
                           alt="File Preview"
-                          className={getImageClassName("w-12 h-16 shadow-md cursor-pointer")} // Updated image class
+                          className={getImageClassName("w-12 h-16 shadow-md cursor-pointer", file.type === "image" ? file.src : "/images/pdf.png")} // Updated image class
                           onClick={() => handleFileOpen(file)}
                         />
                       ))}
@@ -540,7 +546,7 @@ export default function Portfolio() {
                     <img
                       src={activeFile.src}
                       alt="File Preview"
-                      className={getImageClassName("w-full h-auto rounded-md")} // Updated image class
+                      className={getImageClassName("w-full h-auto rounded-md", activeFile.src)} // Updated image class
                     />
                   ) : (
                     <iframe
@@ -632,7 +638,7 @@ export default function Portfolio() {
                         key={index}
                         src={image}
                         alt={`Problem statement illustration ${index + 1}`}
-                        className={getImageClassName("w-full h-auto rounded-lg shadow-md")} // Updated image class
+                        className={getImageClassName("w-full h-auto rounded-lg shadow-md", image)} // Updated image class
                       />
                     )
                   )}
@@ -672,7 +678,7 @@ export default function Portfolio() {
                           <img
                             src={insight.image}
                             alt={`${insight.title} image`}
-                            className={getImageClassName("w-full h-auto")} // Updated image class
+                            className={getImageClassName("w-full h-auto", insight.image)} // Updated image class
                           />
                         </div>
                       )}
@@ -712,7 +718,7 @@ export default function Portfolio() {
                           <img
                             src={step.image}
                             alt={`${step.title} image`}
-                            className={getImageClassName("w-full h-auto mt-8")} // Updated image class
+                            className={getImageClassName("w-full h-auto mt-8", step.image)} // Updated image class
                           />
                         </div>
                       )
@@ -753,7 +759,7 @@ export default function Portfolio() {
                           <img
                             src={feature.image}
                             alt={`${feature.title} image`}
-                            className={getImageClassName("w-full h-auto mt-2")} // Updated image class
+                            className={getImageClassName("w-full h-auto mt-2", feature.image)} // Updated image class
                           />{" "}
                           {/* Added mt-2 for extra padding below content */}
                         </div>
@@ -802,7 +808,7 @@ export default function Portfolio() {
                           file.type === "image" ? file.src : "/images/pdf.png"
                         } // Show PDF icon if it's a PDF file
                         alt="File Preview"
-                        className={getImageClassName("w-12 h-16 shadow-md cursor-pointer")} // Updated image class
+                        className={getImageClassName("w-12 h-16 shadow-md cursor-pointer", file.type === "image" ? file.src : "/images/pdf.png")} // Updated image class
                         onClick={() => window.open(file.src, "_blank")} // Opens file in a new window
                       />
                     ))}
@@ -883,9 +889,11 @@ export default function Portfolio() {
           </div>
         </div>
       )}
+
+      {/* Skills Section */}
       <section
         id="skills"
-        className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 dark:bg-gray-800 px-6"
+        className="min-h-screen flex flex-col justify-center py-20 bg-gray-50 dark:bg-[#020F22] px-6"
       >
         <div className="container mx-auto max-w-6xl">
           <h2 className="section-title text-gray-900 dark:text-white mb-12">
@@ -921,11 +929,11 @@ export default function Portfolio() {
         className="relative min-h-screen flex flex-col justify-center py-20 px-6 bg-[#F8F8FF] dark:bg-gray-900"
       >
         {/* Grid Background */}
-        <div className="absolute inset-0 grid grid-cols-12 gap-4 p-4 pointer-events-none">
-          {Array.from({ length: 144 }).map((_, i) => (
+        <div className="absolute inset-0 grid grid-cols-[repeat(auto-fill,minmax(50px,1fr))] grid-rows-[repeat(auto-fill,minmax(50px,1fr))] gap-0 pointer-events-none min-h-screen">
+          {Array.from({ length: 406 }).map((_, i) => (
             <div
               key={i}
-              className="w-full h-full border border-gray-550 dark:border-gray-800"
+              className="w-full h-[50px] border-[0.5px] border-gray-200 dark:border-gray-800"
             />
           ))}
         </div>
