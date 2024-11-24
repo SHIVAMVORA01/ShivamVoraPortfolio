@@ -413,6 +413,7 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
+
         {/* Experience Section */}
         <section
           id="experience"
@@ -484,6 +485,7 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
+
         {/* Reusable Modal Component */}
         {(activeProject || activeFile) && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -911,7 +913,7 @@ export default function Portfolio() {
               {skills.map((skillGroup, index) => (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md"
+                  className="bg-white dark:bg-[#1B2738] p-6 rounded-xl shadow-md"
                 >
                   <h3 className="font-bold text-gray-900 dark:text-white mb-4">
                     {skillGroup.category}
@@ -931,6 +933,7 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
+        
         {/* Contact Section */}
         <section
           id="contact"
@@ -948,7 +951,7 @@ export default function Portfolio() {
 
           {/* Main Content */}
           <div className="relative z-10 container mx-auto max-w-6xl">
-            <div className="bg-gray-900 dark:bg-[#1F2937] rounded-2xl p-12 text-center">
+            <div className="bg-gray-900 dark:bg-[#1B2738] rounded-2xl p-12 text-center">
               <h2 className="section-title text-white mb-4">{contact.intro1}</h2>
               <h2 className="text-gray-400 mb-8 max-w-2xl mx-auto">
                 {contact.intro2}
