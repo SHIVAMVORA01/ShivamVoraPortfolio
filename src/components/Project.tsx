@@ -137,6 +137,93 @@ export const projects: Project[] = [
   },
   {
     id: 2,
+    title: "Building virtual labs for remote education",
+    description: "OLABS- Chemistry Virtual Lab Simulator",
+    image: "/images/olabs_simulator.png",
+    tags: ["UI/UX Design", "Web Development", "Education"],
+    details: {
+      overview:
+        "The Chemistry Virtual Lab Simulator enables students to perform the experimens in a virtual environment, providing an easy-to-use, interactive alternative to traditional lab setups. This project bridges the gap in practical education during the pandemic, ensuring accessibility for all students.",
+      timeline: "July 2020 - April 2021",
+      tools: "React.js, Framer Motion, Canva/Photoshop",
+      contributions: ["UI/UX Design", "Frontend Development", "Prototyping"],
+      problemStatement:
+        "During my sophomore year, the outbreak of the pandemic made the entire learning process virtual for everyone. Being a computer engineer, I was able to cope with this new form of learning, although many of my peers from other faculties had difficulties, especially in subjects such as chemistry, where lab work is usually required. I have had the opportunity. to work with the Indian government on the OLABS project, which was building virtual labs for students so they could continue remote education. This project provided an easy, interactive, and replicated experience similar to that of a physical lab. It was quite fascinating to see how technology could bridge these educational gaps, especially in these challenging situations.",
+      solutionOverview:
+        "The Chemistry Virtual Lab Simulator provides a fully interactive virtual lab experience. It replicates the 'Single Displacement Reaction' experiment with real-time feedback, animations, and step-by-step guidance. Hosted on the Vidyakash portal, the simulator is freely accessible to schools and students across India.",
+      researchInsights: [
+        {
+          title: "User Feedback",
+          content:
+            "Collected feedback from students and educators to understand the pain points in virtual learning. Key findings included the lack of accessible, intuitive virtual lab tools.",
+          subPoints: [
+            "Educators wanted tools to replicate real lab experiences with minimal setup.",
+            "Students preferred interactive visuals and step-by-step guides.",
+            "Both groups emphasized the importance of accessibility and ease of use.",
+          ],
+        },
+        {
+          title: "Stakeholder Discussions",
+          content:
+            "Engaged with stakeholders, including educators and students, to identify key features and functionalities for an effective virtual lab.",
+        },
+        {
+          title: "Technical Feasibility Study",
+          content:
+            "Evaluated technologies like React.js and Framer Motion to ensure dynamic, responsive, and engaging user experiences.",
+        },
+      ],
+      objectives: [
+        "Provide an immersive virtual lab experience replicating real-world chemistry experiments.",
+        "Ensure accessibility for students across devices via the Vidyakash portal.",
+        "Use animations and real-time feedback to enhance learning and engagement.",
+        "Offer a user-friendly interface for both educators and students.",
+      ],
+      designProcess: [
+        {
+          title: "Prototyping",
+          content:
+            "Developed high-fidelity prototypes showcasing the experiment's step-by-step flow, animations, and interactions.",
+        },
+        {
+          title: "Animation Development",
+          content:
+            "Used Framer Motion to create dynamic animations for chemical reactions, simulating real-time feedback and visual interactions.",
+        },
+        {
+          title: "User Testing",
+          content:
+            "Conducted usability testing with students and educators to refine the simulator’s design and features based on feedback.",
+        },
+      ],
+      keyFeatures: [
+        {
+          title: "A) Interactive Experimentation",
+          content:
+            "The simulator allows students to virtually perform the 'Single Displacement Reaction' experiment with real-time guidance and animations.",
+        },
+        {
+          title: "B) User-Friendly Interface",
+          content:
+            "The interface is intuitive and designed to minimize the learning curve for students.",
+          image: "/images/olabs_simulator_ui_1.png",
+        },
+        {
+          title: "C) Accessibility",
+          content:
+            "Available on the Vidyakash portal, ensuring free access for students and schools across India.",
+          image: "/images/olabs_simulator_ui.png",
+        },
+      ],
+      retrospective:
+        "The Chemistry Virtual Lab Simulator successfully bridged the gap in practical education during the pandemic. Over 10,000 students accessed the simulator, enabling continued learning in chemistry. The project demonstrated how technology can address educational challenges and improve accessibility. The simulator is available at https://cdac.olabs.edu.in/?sub=80&brch=29&sim=276&cnt=4",
+      files: [
+        { src: "CDAC.pdf", type: "pdf" },
+      ],
+    },
+  },
+  {
+    id: 3,
     title: "Enhancing Ticketing Experience for Indian Railways",
     description:
       "UTS App Redesign",
@@ -242,7 +329,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 3,
+    id: 4,
     title: "Revamping DJSCE's Online Presence",
     description: "DJSCE college website redesign",
     image: "/images/DJSCE.png",
@@ -313,94 +400,6 @@ export const projects: Project[] = [
       retrospective:
         "The redesign resulted in a more accessible, visually appealing, and functional website, improving satisfaction among students and staff. Mobile engagement increased by 30%, and navigation issues decreased by 45%. The new website is available at www.djsce.ac.in.",
       files: [{ src: "/files/djsce.pdf", type: "pdf" }],
-    },
-  },
-
-  {
-    id: 4,
-    title: "Building virtual labs for remote education",
-    description: "OLABS- Chemistry Virtual Lab Simulator",
-    image: "/images/olabs_simulator.png",
-    tags: ["UI/UX Design", "Web Development", "Education"],
-    details: {
-      overview:
-        "The Chemistry Virtual Lab Simulator enables students to perform the experiment 'Single Displacement Reaction' in a virtual environment, providing an easy-to-use, interactive alternative to traditional lab setups. This project bridges the gap in practical education during the pandemic, ensuring accessibility for all students.",
-      timeline: "July 2020 - April 2021",
-      tools: "React.js, Framer Motion, Canva/Photoshop",
-      contributions: ["UI/UX Design", "Frontend Development", "Prototyping"],
-      problemStatement:
-        "During my sophomore year, the outbreak of the pandemic made the entire learning process virtual for everyone. Being a computer engineer, I was able to cope with this new form of learning, although many of my peers from other faculties had difficulties, especially in subjects such as chemistry, where lab work is usually required. I have had the opportunity. to work with the Indian government on the OLABS project, which was building virtual labs for students so they could continue remote education. This project provided an easy, interactive, and replicated experience similar to that of a physical lab. It was quite fascinating to see how technology could bridge these educational gaps, especially in these challenging situations.",
-      solutionOverview:
-        "The Chemistry Virtual Lab Simulator provides a fully interactive virtual lab experience. It replicates the 'Single Displacement Reaction' experiment with real-time feedback, animations, and step-by-step guidance. Hosted on the Vidyakash portal, the simulator is freely accessible to schools and students across India.",
-      researchInsights: [
-        {
-          title: "User Feedback",
-          content:
-            "Collected feedback from students and educators to understand the pain points in virtual learning. Key findings included the lack of accessible, intuitive virtual lab tools.",
-          subPoints: [
-            "Educators wanted tools to replicate real lab experiences with minimal setup.",
-            "Students preferred interactive visuals and step-by-step guides.",
-            "Both groups emphasized the importance of accessibility and ease of use.",
-          ],
-        },
-        {
-          title: "Stakeholder Discussions",
-          content:
-            "Engaged with stakeholders, including educators and students, to identify key features and functionalities for an effective virtual lab.",
-        },
-        {
-          title: "Technical Feasibility Study",
-          content:
-            "Evaluated technologies like React.js and Framer Motion to ensure dynamic, responsive, and engaging user experiences.",
-        },
-      ],
-      objectives: [
-        "Provide an immersive virtual lab experience replicating real-world chemistry experiments.",
-        "Ensure accessibility for students across devices via the Vidyakash portal.",
-        "Use animations and real-time feedback to enhance learning and engagement.",
-        "Offer a user-friendly interface for both educators and students.",
-      ],
-      designProcess: [
-        {
-          title: "Prototyping",
-          content:
-            "Developed high-fidelity prototypes showcasing the experiment's step-by-step flow, animations, and interactions.",
-        },
-        {
-          title: "Animation Development",
-          content:
-            "Used Framer Motion to create dynamic animations for chemical reactions, simulating real-time feedback and visual interactions.",
-        },
-        {
-          title: "User Testing",
-          content:
-            "Conducted usability testing with students and educators to refine the simulator’s design and features based on feedback.",
-        },
-      ],
-      keyFeatures: [
-        {
-          title: "A) Interactive Experimentation",
-          content:
-            "The simulator allows students to virtually perform the 'Single Displacement Reaction' experiment with real-time guidance and animations.",
-        },
-        {
-          title: "B) User-Friendly Interface",
-          content:
-            "The interface is intuitive and designed to minimize the learning curve for students.",
-          image: "/images/olabs_simulator_ui_1.png",
-        },
-        {
-          title: "C) Accessibility",
-          content:
-            "Available on the Vidyakash portal, ensuring free access for students and schools across India.",
-          image: "/images/olabs_simulator_ui.png",
-        },
-      ],
-      retrospective:
-        "The Chemistry Virtual Lab Simulator successfully bridged the gap in practical education during the pandemic. Over 10,000 students accessed the simulator, enabling continued learning in chemistry. The project demonstrated how technology can address educational challenges and improve accessibility. The simulator is available at https://cdac.olabs.edu.in/?sub=80&brch=29&sim=276&cnt=4",
-      files: [
-        { src: "CDAC.pdf", type: "pdf" },
-      ],
     },
   },
 ];
